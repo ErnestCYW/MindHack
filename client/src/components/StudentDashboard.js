@@ -21,7 +21,7 @@ function StudentDashboard({ setAuth }) {
       const messages = JSON.parse(parseRes.messages);
 
       setName(parseRes.user_name);
-      setMessages(parseRes.messages)
+      setMessages(messages)
     } catch (err) {
       console.error(err.message);
     }
@@ -52,6 +52,8 @@ function StudentDashboard({ setAuth }) {
     console.log(results);
   }
 
+<<<<<<< HEAD
+=======
   const selectResponse = (setState, name) => {
     return(
       <div>
@@ -79,15 +81,17 @@ function StudentDashboard({ setAuth }) {
     )
   }
 
+>>>>>>> 204ca60cca4f8e4739fe8f2b38f41a766570b81b
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
       <div className="display-4 bg-warning">
         Student name: {name}
       </div>
-      <div className="display-4 bg-info">
-        {messages}
-        Messages:
+      <div className="bg-info">
+        {messages.map(message => {
+          return <div> school: {message.school_name} time: {message.date_time} contents: {message.message_content} </div>
+        })}
       </div>
       <button
         className="btn btn-primary btn-sm "
