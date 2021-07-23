@@ -15,6 +15,7 @@ import Sidebar from "../Sidebar";
 
 // pages
 import Dashboard from "../../pages/dashboard";
+import ThoughtsWall from "../../pages/thoughtsWall";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -38,6 +39,8 @@ function Layout(props) {
             <div className={classes.fakeToolbar} />
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
+              <Route path="/app/thoughtswall" component={ThoughtsWall} />
+              <Route path="/app/chatroom" component={Dashboard} />
             </Switch>
           </div>
         </>
