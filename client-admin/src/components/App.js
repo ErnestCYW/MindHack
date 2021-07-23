@@ -1,5 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -41,7 +46,7 @@ export default function App() {
   });
 
   return (
-    <HashRouter>
+    <Router>
       <Switch>
         <Route
           exact
@@ -83,7 +88,7 @@ export default function App() {
         <PublicRoute path="/login" component={Login} />
         <Route component={Error} />
       </Switch>
-    </HashRouter>
+    </Router>
   );
 
   // #######################################################################

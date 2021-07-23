@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 function StudentDashboard({ setAuth }) {
@@ -21,13 +21,13 @@ function StudentDashboard({ setAuth }) {
       const messages = JSON.parse(parseRes.messages);
 
       setName(parseRes.user_name);
-      setMessages(messages)
+      setMessages(messages);
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  useEffect( () => {
+  useEffect(() => {
     getAll();
   }, []);
 
@@ -47,50 +47,81 @@ function StudentDashboard({ setAuth }) {
       answer2: answer2,
       answer3: answer3,
       answer4: answer4,
-      answer5: answer5
-    }
+      answer5: answer5,
+    };
     console.log(results);
-  }
+  };
 
-<<<<<<< HEAD
-=======
   const selectResponse = (setState, name) => {
-    return(
+    return (
       <div>
-      <input class="form-check-input" type="radio" name={name} id="option1" onChange={() => setState(1)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option1"
+          onChange={() => setState(1)}
+        ></input>
         <label class="form-check-label" for="option1">
-        1
+          1
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option2" onChange={() => setState(2)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option2"
+          onChange={() => setState(2)}
+        ></input>
         <label class="form-check-label" for="option2">
-        2
+          2
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option3" onChange={() => setState(3)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option3"
+          onChange={() => setState(3)}
+        ></input>
         <label class="form-check-label" for="option3">
-        3
+          3
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option4" onChange={() => setState(4)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option4"
+          onChange={() => setState(4)}
+        ></input>
         <label class="form-check-label" for="option4">
-        4
+          4
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option5" onChange={() => setState(5)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option5"
+          onChange={() => setState(5)}
+        ></input>
         <label class="form-check-label" for="option5">
-        5
+          5
         </label>
       </div>
-    )
-  }
+    );
+  };
 
->>>>>>> 204ca60cca4f8e4739fe8f2b38f41a766570b81b
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
-      <div className="display-4 bg-warning">
-        Student name: {name}
-      </div>
+      <div className="display-4 bg-warning">Student name: {name}</div>
       <div className="bg-info">
-        {messages.map(message => {
-          return <div> school: {message.school_name} time: {message.date_time} contents: {message.message_content} </div>
+        {messages.map((message) => {
+          return (
+            <div>
+              {" "}
+              school: {message.school_name} time: {message.date_time} contents:{" "}
+              {message.message_content}{" "}
+            </div>
+          );
         })}
       </div>
       <button
@@ -109,13 +140,15 @@ function StudentDashboard({ setAuth }) {
       <div>Question4</div>
       {selectResponse(setAnswer4, "q4")}
       <div>Question5</div>
-      {selectResponse(setAnswer5, 'q5')}
+      {selectResponse(setAnswer5, "q5")}
       <button
         className="btn btn-primary btn-sm "
         onClick={() => submit()}
         id="submit"
-      >Submit</button>
-      </div>
+      >
+        Submit
+      </button>
+    </div>
   );
 }
 
