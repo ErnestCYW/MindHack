@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import School_Options from "./School_Options";
 
 const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
@@ -131,10 +132,16 @@ const Register = ({ setAuth }) => {
                 name="school"
                 placeholder="Enter your school"
                 value={school}
+                list="anrede"
                 onChange={(e) => onChange(e)}
               />
               {errors.school && <p>{errors.school}</p>}
             </div>
+            <datalist id="anrede">
+              {School_Options.map((school) => {
+                return <option value={school}></option>;
+              })}
+            </datalist>
 
             <button className="form-input-btn btn btn-primary " type="submit">
               Submit

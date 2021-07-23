@@ -42,6 +42,7 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Tampines Meridian
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Temasek Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Victoria Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
+INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'NUS');
 
 --Check in question 1, 2, 3, 4, 5 
 CREATE TABLE question1 (
