@@ -38,7 +38,7 @@ router.post("/register", validInfo, async (req, res) => {
 
     const updateSchoolRelation = await pool.query(
       "INSERT INTO school_relations (school_id, user_id) VALUES ($1, $2)",
-      [getSchoolId.school_id, newUser.rows[0].user_id]
+      [getSchoolId.rows[0].school_id, newUser.rows[0].user_id]
     );
 
     //5. generating our jwt token

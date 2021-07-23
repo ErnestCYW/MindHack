@@ -2,15 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Drawer, IconButton, List } from "@material-ui/core";
 import {
   Home as HomeIcon,
-  NotificationsNone as NotificationsIcon,
-  FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
-  BorderAll as TableIcon,
-  QuestionAnswer as SupportIcon,
-  LibraryBooks as LibraryIcon,
-  HelpOutline as FAQIcon,
   ArrowBack as ArrowBackIcon,
   Chat as ChatIcon,
+  Note as NoteIcon
 } from "@material-ui/icons";
 import { useTheme } from "@material-ui/styles";
 import { withRouter } from "react-router-dom";
@@ -21,7 +15,6 @@ import useStyles from "./styles";
 
 // components
 import SidebarLink from "./components/SidebarLink/SidebarLink";
-import Dot from "./components/Dot";
 
 // context
 import {
@@ -34,9 +27,16 @@ const structure = [
   { id: 0,
     label: "Dashboard",
     link: "/app/dashboard",
-    icon: <HomeIcon /> },
+    icon: <HomeIcon /> 
+  },
   {
     id: 1,
+    label: "Thoughts Wall",
+    link: "/app/thoughtswall",
+    icon: <NoteIcon />,
+  },  
+  {
+    id: 2,
     label: "Chatroom",
     link: "/app/chatroom",
     icon: <ChatIcon />,

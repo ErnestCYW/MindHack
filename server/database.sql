@@ -42,6 +42,7 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Tampines Meridian
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Temasek Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Victoria Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
+INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'NUS');
 
 CREATE TABLE school_message_board (
   school_id UUID REFERENCES schools(school_id) NOT NULL,
