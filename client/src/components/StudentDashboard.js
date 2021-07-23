@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 function StudentDashboard({ setAuth }) {
   const [name, setName] = useState("");
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState([]);
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
@@ -52,8 +52,6 @@ function StudentDashboard({ setAuth }) {
     console.log(results);
   }
 
-<<<<<<< HEAD
-=======
   const selectResponse = (setState, name) => {
     return(
       <div>
@@ -81,7 +79,6 @@ function StudentDashboard({ setAuth }) {
     )
   }
 
->>>>>>> 204ca60cca4f8e4739fe8f2b38f41a766570b81b
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
