@@ -11,6 +11,8 @@ function StudentDashboard({ setAuth }) {
   };
   return (
     <div>
+      <div>
+      Student Dashboard
       <button
         className="btn btn-primary btn-sm "
         onClick={(e) => logout(e)}
@@ -18,7 +20,7 @@ function StudentDashboard({ setAuth }) {
       >
         Logout
       </button>
-      Student Dashboard
+      </div>
     </div>
   );
 }
