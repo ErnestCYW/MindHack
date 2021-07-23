@@ -22,6 +22,28 @@ router.get("/individual", async (req, res) => {
       "SELECT * FROM question1 WHERE user_id = '$1' ORDER BY date_time DESC",
       [user_id]
     );
+
+    const allQuestion2 = await pool.query(
+      "SELECT * FROM question2 WHERE user_id = '$1' ORDER BY date_time DESC",
+      [user_id]
+    );
+
+    const allQuestion3 = await pool.query(
+      "SELECT * FROM question3 WHERE user_id = '$1' ORDER BY date_time DESC",
+      [user_id]
+    );
+
+    const allQuestion4 = await pool.query(
+      "SELECT * FROM question4 WHERE user_id = '$1' ORDER BY date_time DESC",
+      [user_id]
+    );
+
+    const allQuestion5 = await pool.query(
+      "SELECT * FROM question5 WHERE user_id = '$1' ORDER BY date_time DESC",
+      [user_id]
+    );
+
+    // RETURN ALL
   } catch (err) {
     console.error(err.message);
   }
