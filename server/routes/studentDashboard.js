@@ -22,13 +22,8 @@ router.get("/", authorization, async (req, res) => {
     const quotes = await pool.query("SELECT author_name, content FROM quotes");
     const quote = quotes.rows[Math.floor(Math.random() * quotes.rows.length)];
 
-<<<<<<< HEAD
         const declaration_time = await pool.query(
             "SELECT date_time FROM answers \
-=======
-    const declaration_time = await pool.query(
-      "SELECT date_time FROM answers \
->>>>>>> d3a6f88ab7ec5d0dcbc2da88147091c768213228
             WHERE user_id = $1 ORDER BY date_time DESC LIMIT 1",
       [req.user]
     );
