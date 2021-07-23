@@ -11,6 +11,8 @@ CREATE TABLE users (
   is_admin BOOLEAN 
 );
 
+--Testing Insert 
+
 --School table
 CREATE TABLE schools (
   school_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

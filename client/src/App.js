@@ -13,6 +13,7 @@ import {
 //components
 import Login from "./components/Login";
 import Register from "./components/Register";
+import StudentDashboard from "./components/StudentDashboard";
 
 toast.configure();
 
@@ -55,7 +56,7 @@ function App() {
                 !isAuthenticated ? (
                   <Login {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/feed" />
+                  <Redirect to="/studentDashboard" />
                 )
               }
             />
@@ -65,6 +66,17 @@ function App() {
               render={(props) =>
                 !isAuthenticated ? (
                   <Register {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/studentDashboard" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/studentDashboard"
+              render={(props) =>
+                localStorage.token ? (
+                  <StudentDashboard {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/login" />
                 )
