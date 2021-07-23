@@ -3,8 +3,6 @@ import { Grid } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
   PieChart,
   Pie,
   Cell,
@@ -79,7 +77,6 @@ export default function Dashboard(props) {
       });
 
       const parseRes = await response.json();
-      const user_name = parseRes.user_name;
       const totalStudents = parseRes.totalStudents;
       const totalRespondedToday = parseRes.totalRespondedToday;
 
