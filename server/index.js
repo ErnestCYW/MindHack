@@ -16,8 +16,8 @@ app.use(cors());
 //register and login routes
 app.use("/auth", require("./routes/jwtAuth"));
 
-//dashboard route
-// app.use("/dashboard", require("./routes/dashboard"));
+//studentDashboard route
+app.use("/studentDashboard", require("./routes/studentDashboard"));
 
 app.listen(port, () => {
   console.log(`server has started on port ${port}`);
