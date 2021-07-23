@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper, Typography, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import classnames from "classnames";
+import { Grid, Paper } from "@material-ui/core";
+
 
 // styles
 import useStyles from "./styles";
@@ -12,7 +11,7 @@ import logo from "./logo.svg";
 export default function ThoughtsWall() {
   var classes = useStyles();
   const [name, setName] = useState("");
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const getAll = async () => {
     try {
@@ -22,10 +21,11 @@ export default function ThoughtsWall() {
       });
 
       const parseRes = await response.json();
-      const messages = JSON.parse(parseRes.messages);
+      const messages = parseRes.messages;
       console.log(parseRes)
       setName(parseRes.user_name);
-      setMessages(messages)
+      setMessages(JSON.parse(messages));
+      
     } catch (err) {
       console.error(err.message);
     }
@@ -38,7 +38,7 @@ export default function ThoughtsWall() {
   return (
     <Grid container className={classes.container}>
       <Paper classes={{ root: classes.paperRoot }}>
-        hello
+        {messages}
       </Paper>
     </Grid>
   );
