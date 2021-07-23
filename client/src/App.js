@@ -55,7 +55,7 @@ function App() {
                 !isAuthenticated ? (
                   <Login {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/feed" />
+                  <Redirect to="/studentDashboard" />
                 )
               }
             />
@@ -66,7 +66,7 @@ function App() {
                 !isAuthenticated ? (
                   <Register {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/login" />
+                  <Redirect to="/studentDashboard" />
                 )
               }
             />
