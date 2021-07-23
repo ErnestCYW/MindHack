@@ -43,6 +43,13 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Temasek Junior Co
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Victoria Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
 
+CREATE TABLE school_message_board (
+  school_id UUID REFERENCES schools(school_id) NOT NULL,
+  user_id UUID REFERENCES users(user_id) NOT NULL,
+  message_content TEXT NOT NULL,
+  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 --Check in question 1, 2, 3, 4, 5 
 CREATE TABLE question1 (
   user_id UUID REFERENCES users(user_id) NOT NULL,
