@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 function StudentDashboard({ setAuth }) {
   const [name, setName] = useState("");
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const getAll = async () => {
     try {
@@ -16,7 +16,7 @@ function StudentDashboard({ setAuth }) {
       const messages = JSON.parse(parseRes.messages);
 
       setName(parseRes.user_name);
-      setMessages(parseRes.messages)
+      setMessages(messages)
     } catch (err) {
       console.error(err.message);
     }
@@ -34,17 +34,16 @@ function StudentDashboard({ setAuth }) {
     getAll();
   }, []);
 
-  console.log(messages);
-
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
       <div className="display-4 bg-warning">
         Student name: {name}
       </div>
-      <div className="display-4 bg-info">
-        {messages}
-        Messages:
+      <div className="bg-info">
+        {messages.map(message => {
+          return <div> school: {message.school_name} time: {message.date_time} contents: {message.message_content} </div>
+        })}
       </div>
       <button
         className="btn btn-primary btn-sm "
