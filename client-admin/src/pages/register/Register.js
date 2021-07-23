@@ -1,8 +1,33 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { makeStyles } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import School_Options from "./School_Options";
+import InputLabel from "@material-ui/core/InputLabel"
+import Select from "@material-ui/core/Select"
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: theme.spacing(2),
+
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '300px',
+    },
+    '& .MuiButtonBase-root': {
+      margin: theme.spacing(2),
+    },
+  },
+}));
 
 const Register = ({ setAuth }) => {
+  const classes = useStyles();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -51,17 +76,14 @@ const Register = ({ setAuth }) => {
   return (
     <div className="authentication">
       <div className="form-container">
-        <div className="form-content-left">
+        <div className={classes.root}>
           <h1 className="text-center my-5">Register</h1>
         </div>
 
         <div className="form-content-right">
-          <form onSubmit={onSubmitForm} className="form">
+          <form onSubmit={onSubmitForm} className={classes.root}>
             <div className="form-inputs">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <input
+            <TextField 
                 className="form-input"
                 id="email"
                 type="email"
@@ -74,10 +96,7 @@ const Register = ({ setAuth }) => {
             </div>
 
             <div className="form-inputs">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
+              <TextField 
                 className="form-input "
                 id="password"
                 type="password"
@@ -90,15 +109,12 @@ const Register = ({ setAuth }) => {
             </div>
 
             <div className="form-inputs">
-              <label htmlFor="password2" className="form-label">
-                Confirm Password
-              </label>
-              <input
-                className="form-input"
+            <TextField 
+                className="form-input "
                 id="password2"
                 type="password"
                 name="password2"
-                placeholder="Confirm your password"
+                placeholder="Enter your password again"
                 value={password2}
                 onChange={(e) => onChange(e)}
               />
@@ -106,10 +122,7 @@ const Register = ({ setAuth }) => {
             </div>
 
             <div className="form-inputs">
-              <label htmlFor="name" className="form-label">
-                Name
-              </label>
-              <input
+              <TextField 
                 className="form-input"
                 id="name"
                 type="text"
@@ -122,10 +135,22 @@ const Register = ({ setAuth }) => {
             </div>
 
             <div className="form-inputs">
-              <label htmlFor="school" className="form-label">
-                School
-              </label>
-              <input
+            <InputLabel htmlFor="age-native-simple">Age</InputLabel>
+        <Select
+          native
+          value={school}
+          onChange={(e) => onChange(e)}
+          inputProps={{
+            name: 'age',
+            id: 'age-native-simple',
+          }}
+        >
+          <option aria-label="None" value="" />
+          <option value={10}>Ten</option>
+          <option value={20}>Twenty</option>
+          <option value={30}>Thirty</option>
+        </Select>
+              <TextField 
                 className="form-input"
                 id="school"
                 type="text"

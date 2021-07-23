@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, IconButton, Menu } from "@material-ui/core";
 import {
   Menu as MenuIcon,
@@ -40,6 +40,30 @@ export default function Header(props) {
 
   // local
   var [profileMenu, setProfileMenu] = useState(null);
+  const [user, setUser] = useState("");
+  const [school, setSchool] = useState("")
+
+  const getAll = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/adminDashboard/", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
+
+      const parseRes = await response.json();
+      const user_name = parseRes.user_name;
+      const school = parseRes.school;
+      setUser(user_name);
+      setSchool(school);
+      
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -73,7 +97,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Mental Wellness Check In for NUS
+          MindStatus Check In for {school}
         </Typography>
         <div className={classes.grow} />
 
@@ -98,7 +122,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Doe
+              {user}
             </Typography>
           </div>
 

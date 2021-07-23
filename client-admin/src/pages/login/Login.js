@@ -1,7 +1,30 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { makeStyles } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: theme.spacing(2),
+
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '300px',
+    },
+    '& .MuiButtonBase-root': {
+      margin: theme.spacing(2),
+    },
+  },
+}));
 
 const Login = ({ setAuth }) => {
+  const classes = useStyles();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -45,32 +68,26 @@ const Login = ({ setAuth }) => {
   return (
     <div className="authentication">
       <div className="form-container">
-        <div className="form-content-left">
-          <h1 className="text-center my-5">Login</h1>
+        <div className={classes.root}>
+          <h1 className="text-center my-5">Login to Admin Console</h1>
         </div>
 
         <div className="form-content-right">
-          <form onSubmit={onSubmitForm} className="form">
+          <form onSubmit={onSubmitForm} className={classes.root}>
             <div className="form-inputs">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <input
+              <TextField 
                 className="form-input"
                 type="email"
                 name="email"
                 placeholder="Enter your email"
                 value={email}
-                onChange={(e) => onChange(e)} //allows you to type!
+                onChange={(e) => onChange(e)}
               />
               {errors.email && <p>{errors.email}</p>}
             </div>
 
             <div className="form-inputs">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
+              <TextField 
                 className="form-input"
                 type="password"
                 name="password"
@@ -80,9 +97,9 @@ const Login = ({ setAuth }) => {
               />
               {errors.password && <p>{errors.password}</p>}
             </div>
-            <button className="form-input-btn" type="submit">
+            <Button className="form-input-btn" variant="contained" color="primary" type="submit">
               Submit
-            </button>
+            </Button>
             <span className="form-input-login">
               Register <a href="/register">here</a>
             </span>

@@ -19,18 +19,17 @@ import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 
-
-
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
   const [numResponses, setNumResponses] = useState(0);
   const [numStudents, setNumStudents] = useState(0);
-  const [q1Data, setQ1Data] = useState([0,0,0,0,0]);
-  const [q2Data, setQ2Data] = useState([0,0,0,0,0]);
-  const [q3Data, setQ3Data] = useState([0,0,0,0,0]);
-  const [q4Data, setQ4Data] = useState([0,0,0,0,0]);
-  const [q5Data, setQ5Data] = useState([0,0,0,0,0]);
+  const [q1Data, setQ1Data] = useState([0, 0, 0, 0, 0]);
+  const [q2Data, setQ2Data] = useState([0, 0, 0, 0, 0]);
+  const [q3Data, setQ3Data] = useState([0, 0, 0, 0, 0]);
+  const [q4Data, setQ4Data] = useState([0, 0, 0, 0, 0]);
+  const [q5Data, setQ5Data] = useState([0, 0, 0, 0, 0]);
+  const [dangerStudents, setDangerStudents] = useState([]);
 
   const q1data = [
     { name: "1", value: q1Data[0], color: "primary" },
@@ -39,7 +38,7 @@ export default function Dashboard(props) {
     { name: "4", value: q1Data[3], color: "success" },
     { name: "5", value: q1Data[4], color: "info" },
   ];
-  
+
   const q2data = [
     { name: "1", value: q2Data[0], color: "primary" },
     { name: "2", value: q2Data[1], color: "secondary" },
@@ -47,14 +46,14 @@ export default function Dashboard(props) {
     { name: "4", value: q2Data[3], color: "success" },
     { name: "5", value: q2Data[4], color: "info" },
   ];
-  
+
   const q3data = [
     { name: "1", value: q3Data[0], color: "primary" },
     { name: "2", value: q3Data[1], color: "secondary" },
     { name: "3", value: q3Data[2], color: "warning" },
     { name: "4", value: q3Data[3], color: "success" },
     { name: "5", value: q3Data[4], color: "info" },
-  ]
+  ];
 
   const q4data = [
     { name: "1", value: q4Data[0], color: "primary" },
@@ -63,7 +62,7 @@ export default function Dashboard(props) {
     { name: "4", value: q4Data[3], color: "success" },
     { name: "5", value: q4Data[4], color: "info" },
   ];
-  
+
   const q5data = [
     { name: "1", value: q5Data[0], color: "primary" },
     { name: "2", value: q5Data[1], color: "secondary" },
@@ -80,11 +79,13 @@ export default function Dashboard(props) {
       });
 
       const parseRes = await response.json();
+      const user_name = parseRes.user_name;
       const totalStudents = parseRes.totalStudents;
       const totalRespondedToday = parseRes.totalRespondedToday;
 
       setNumResponses(totalRespondedToday);
       setNumStudents(totalStudents);
+      setDangerStudents(JSON.parse(parseRes.dangerStudents));
 
       const overallResponse = JSON.parse(parseRes.overallResponse);
       console.log(overallResponse);
@@ -392,26 +393,14 @@ export default function Dashboard(props) {
               justify="space-between"
               alignItems="center"
             >
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Total Students
-                </Typography>
-                <Typography size="md">{numStudents}</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Number who responded today
-                </Typography>
-                <Typography size="md">{numResponses}</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography color="text" colorBrightness="secondary" noWrap>
-                  Completion Rate
-                </Typography>
-                <Typography size="md">
-                  {(numResponses / numStudents).toFixed(4) * 100}%
-                </Typography>
-              </Grid>
+              {dangerStudents.map((student) => (
+                <Grid item xs={4}>
+                  <Typography size="md">{student.user_name}</Typography>
+                  <Typography color="text" colorBrightness="secondary" noWrap>
+                    Total Score: {student.total_score}
+                  </Typography>
+                </Grid>
+              ))}
             </Grid>
           </Widget>
         </Grid>
