@@ -2,7 +2,7 @@
 //Checks that we are sending valid information
 
 module.exports = (req, res, next) => {
-  const { email, name, username, password, password2 } = req.body;
+  const { email, name, password, password2, school } = req.body;
 
   let errors = {};
 
@@ -17,10 +17,6 @@ module.exports = (req, res, next) => {
       errors.email = "Email address is invalid";
     }
 
-    if (!username) {
-      errors.username = "Username required";
-    }
-
     if (!name) {
       errors.name = "Name required";
     }
@@ -33,6 +29,10 @@ module.exports = (req, res, next) => {
       errors.password2 = "Password required";
     } else if (password !== password2) {
       errors.password2 = "Passwords do not match";
+    }
+
+    if (!school) {
+      errors.school = "School required";
     }
 
     // Throw errors if any errors

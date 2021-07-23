@@ -7,7 +7,7 @@ const authorization = require("../middleware/authorization");
 
 router.post("/register", validInfo, async (req, res) => {
   try {
-    const { name, username, email, password, password2 } = req.body;
+    const { email, password, name, school } = req.body;
 
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
       email,
@@ -17,16 +17,7 @@ router.post("/register", validInfo, async (req, res) => {
       return res.status(401).json("User already exists!"); //see 401 and 403 codes!
     }
 
-    const existingUsername = await pool.query(
-      "SELECT * FROM user_username WHERE username = $1",
-      [username]
-    );
-
-    if (existingUsername.rows.length !== 0) {
-      return res.status(401).json("Username is taken!");
-    }
-
-    //3. Bcrypt the user password (see npm bcrypt documentation)
+    //Bcrypt the user password (see npm bcrypt documentation)
 
     const saltRound = 10;
     const salt = await bcrypt.genSalt(saltRound); //note: await is for async functions
@@ -40,9 +31,14 @@ router.post("/register", validInfo, async (req, res) => {
       [name, email, bcryptPassword]
     );
 
-    const newUsername = await pool.query(
-      "INSERT INTO user_username (user_id, username) VALUES ($1, $2)",
-      [newUser.rows[0].user_id, username]
+    const getSchoolId = await pool.query(
+      "SELECT school_id FROM schools WHERE school_name = $1",
+      [school]
+    );
+
+    const updateSchoolRelation = await pool.query(
+      "INSERT INTO school_relations (school_id, user_id) VALUES ($1, $2)",
+      [getSchoolId.school_id, newUser.rows[0].user_id]
     );
 
     //5. generating our jwt token
