@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Menu,
-} from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Menu } from "@material-ui/core";
 import {
   Menu as MenuIcon,
   AccountCircle as AccountIcon,
@@ -18,7 +13,6 @@ import useStyles from "./styles";
 // components
 import { Typography } from "../Wrappers";
 
-
 // context
 import {
   useLayoutState,
@@ -29,6 +23,15 @@ import { useUserDispatch, signOut } from "../../context/UserContext";
 
 export default function Header(props) {
   var classes = useStyles();
+  const setAuth = props.setAuth;
+  console.log(setAuth);
+
+  const logout = (e) => {
+    e.preventDefault();
+    console.log("Triggered");
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   // global
   var layoutState = useLayoutState();
@@ -73,13 +76,13 @@ export default function Header(props) {
           Mental Wellness Check In for NUS
         </Typography>
         <div className={classes.grow} />
-        
+
         <IconButton
           aria-haspopup="true"
           color="inherit"
           className={classes.headerMenuButton}
           aria-controls="profile-menu"
-          onClick={e => setProfileMenu(e.currentTarget)}
+          onClick={(e) => setProfileMenu(e.currentTarget)}
         >
           <AccountIcon classes={{ root: classes.headerIcon }} />
         </IconButton>
@@ -98,12 +101,13 @@ export default function Header(props) {
               John Doe
             </Typography>
           </div>
-          
+
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={() => signOut(userDispatch, props.history)}
+              // onClick={() => signOut(userDispatch, props.history)}
+              onClick={(e) => logout(e)}
             >
               Sign Out
             </Typography>
