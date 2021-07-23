@@ -1,10 +1,10 @@
 // For students (questions)
+const e = require("express");
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
 const router = require("./jwtAuth");
 
 router.get("/", authorization, async (req, res) => {
-    console.log(req)
     try {
         const user = await pool.query(
             "SELECT user_name FROM users WHERE user_id = $1",
@@ -24,18 +24,23 @@ router.get("/", authorization, async (req, res) => {
         );
         const quote = quotes.rows[Math.floor(Math.random()*quotes.rows.length)];
 
-        /*
         const declaration_time = await pool.query(
-            "SELECT author_name, content FROM question ORDER BY date_time DESC \
-            WHERE user_id = $1",
+            "SELECT date_time FROM question \
+            WHERE user_id = $1 ORDER BY date_time DESC LIMIT 1",
             [req.user]
         );
-        */
+        const currentdate = new Date();
+        let has_done_daily_declaration = false;
+        if (declaration_time.rows[0].date_time.getFullYear() === currentdate.getFullYear() && declaration_time.rows[0].date_time.getMonth() === currentdate.getMonth() && declaration_time.rows[0].date_time.getDate() === currentdate.getDate()) {
+            has_done_daily_declaration = true;
+        } else {
+            has_done_daily_declaration = false;
+        }
 
         const toReturn = {
             user_name: user.rows[0].user_name,
             messages: JSON.stringify(messages.rows),
-            has_done_daily_declaration: true,
+            has_done_daily_declaration: has_done_daily_declaration,
             quote: JSON.stringify(quote)
         };
 
