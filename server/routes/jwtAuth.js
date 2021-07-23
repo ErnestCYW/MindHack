@@ -97,7 +97,7 @@ router.get("/is-verify", authorization, async (req, res) => {
       "SELECT is_admin FROM users WHERE user_id = $1",
       [req.user]
     );
-    res.json({isVerified : true, isAdmin : isAdmin.rows[0].is_admin});
+    res.json(true);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

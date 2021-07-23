@@ -80,6 +80,7 @@ export default function Dashboard(props) {
       });
 
       const parseRes = await response.json();
+      const user_name = parseRes.user_name;
       const totalStudents = parseRes.totalStudents;
       const totalRespondedToday = parseRes.totalRespondedToday;
 
