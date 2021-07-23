@@ -1,5 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+<<<<<<< HEAD
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+=======
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+>>>>>>> c7784b5ed8f1c9f2afefdbfe2e26661111ac3d68
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -7,7 +16,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Layout from "./Layout";
 
 // pages
-import Error from "../pages/error";
 import Login from "../pages/login";
 import Register from "../pages/register";
 
@@ -41,7 +49,7 @@ export default function App() {
   });
 
   return (
-    <HashRouter>
+    <Router>
       <Switch>
         <Route
           exact
@@ -81,9 +89,9 @@ export default function App() {
         <PrivateRoute path="/app" component={Layout} setAuth={setAuth} />
         <PublicRoute path="/register" component={Register} />
         <PublicRoute path="/login" component={Login} />
-        <Route component={Error} />
+        
       </Switch>
-    </HashRouter>
+    </Router>
   );
 
   // #######################################################################

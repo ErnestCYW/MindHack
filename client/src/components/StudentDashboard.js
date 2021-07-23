@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 function StudentDashboard({ setAuth }) {
   const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
+  const [quote, setQuote] = useState(null);
+  const [completed, setCompleted] = useState(false);
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
@@ -19,17 +21,31 @@ function StudentDashboard({ setAuth }) {
 
       const parseRes = await response.json();
       const messages = JSON.parse(parseRes.messages);
+      const quote = JSON.parse(parseRes.quote);
+      const completed = JSON.parse(parseRes.has_done_daily_declaration)
+      console.log(quote);
 
       setName(parseRes.user_name);
-      setMessages(messages)
+      setMessages(messages);
+      setQuote(quote);
+      setCompleted(completed);
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  useEffect( () => {
+  useEffect(() => {
     getAll();
   }, []);
+
+  const getQuote = () => {
+    return(
+      <div>
+        <h2>{quote['content']}</h2>
+        <h3>~ {quote['author_name']}</h3>
+      </div>
+    )
+  }
 
   console.log(messages);
 
@@ -57,39 +73,68 @@ function StudentDashboard({ setAuth }) {
   }
 
   const selectResponse = (setState, name) => {
-    return(
+    return (
       <div>
-      <input class="form-check-input" type="radio" name={name} id="option1" onChange={() => setState(1)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option1"
+          onChange={() => setState(1)}
+        ></input>
         <label class="form-check-label" for="option1">
-        1
+          1
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option2" onChange={() => setState(2)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option2"
+          onChange={() => setState(2)}
+        ></input>
         <label class="form-check-label" for="option2">
-        2
+          2
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option3" onChange={() => setState(3)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option3"
+          onChange={() => setState(3)}
+        ></input>
         <label class="form-check-label" for="option3">
-        3
+          3
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option4" onChange={() => setState(4)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option4"
+          onChange={() => setState(4)}
+        ></input>
         <label class="form-check-label" for="option4">
-        4
+          4
         </label>
-        <input class="form-check-input" type="radio" name={name} id="option5" onChange={() => setState(5)}></input>
+        <input
+          class="form-check-input"
+          type="radio"
+          name={name}
+          id="option5"
+          onChange={() => setState(5)}
+        ></input>
         <label class="form-check-label" for="option5">
-        5
+          5
         </label>
       </div>
-    )
-  }
+    );
+  };
 
-  const completed = true;
 
   const survey = () => {
     if (completed) {
       return(
         <div>
-          <h2>Quote of the day!</h2>
+          {getQuote()}
         </div>
       )
     } else {
@@ -118,12 +163,16 @@ function StudentDashboard({ setAuth }) {
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
-      <div className="display-4 bg-warning">
-        Student name: {name}
-      </div>
+      <div className="display-4 bg-warning">Student name: {name}</div>
       <div className="bg-info">
-        {messages.map(message => {
-          return <div> school: {message.school_name} time: {message.date_time} contents: {message.message_content} </div>
+        {messages.map((message) => {
+          return (
+            <div>
+              {" "}
+              school: {message.school_name} time: {message.date_time} contents:{" "}
+              {message.message_content}{" "}
+            </div>
+          );
         })}
       </div>
       <button
