@@ -97,8 +97,11 @@ SELECT COUNT(distinct users.user_id) FROM users LEFT JOIN school_relations ON us
 SELECT count() FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN question1 ON question1.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND users.is_admin = 'f';
 
 -- Get all question scores from one user 
-INSERT INTO answers (user_id, date_time, answer1, answer2, answer3, answer4, answer5) VALUES ('c81d5410-3e62-412c-96be-86e2bcb682b1', NOW(), 5, 4, 3, 4, 1);
+INSERT INTO answers (user_id, date_time, answer1, answer2, answer3, answer4, answer5) VALUES ('6cf5ef9b-e88a-43cf-b254-ca66fdbf9fe7', NOW(), 5, 4, 3, 4, 1);
 
 SELECT date_time::date FROM answers WHERE user_id = 'c81d5410-3e62-412c-96be-86e2bcb682b1' ORDER BY date_time DESC;
 
 SELECT COUNT(DISTINCT users.user_id) FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND date_time::date BETWEEN '2021-07-23' AND 'current_date'
+
+
+SELECT COUNT(DISTINCT users.user_id) FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND date_time::date = current_date;

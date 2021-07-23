@@ -38,8 +38,6 @@ export default function ThoughtsWall() {
         return (
           <Paper classes={{ root: classes.paperRoot }}>
             {msg.message_content}
-            <hr />
-            {name}
           </Paper>
         );
       })}
