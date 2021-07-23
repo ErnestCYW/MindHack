@@ -1,5 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+=======
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+>>>>>>> d3a6f88ab7ec5d0dcbc2da88147091c768213228
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -80,7 +89,6 @@ export default function App() {
         <PrivateRoute path="/app" component={Layout} setAuth={setAuth} />
         <PublicRoute path="/register" component={Register} />
         <PublicRoute path="/login" component={Login} />
-        
       </Switch>
     </Router>
   );

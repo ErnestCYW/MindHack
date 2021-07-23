@@ -22,7 +22,7 @@ function StudentDashboard({ setAuth }) {
       const parseRes = await response.json();
       const messages = JSON.parse(parseRes.messages);
       const quote = JSON.parse(parseRes.quote);
-      const completed = JSON.parse(parseRes.has_done_daily_declaration)
+      const completed = JSON.parse(parseRes.has_done_daily_declaration);
       console.log(quote);
 
       setName(parseRes.user_name);
@@ -39,13 +39,13 @@ function StudentDashboard({ setAuth }) {
   }, []);
 
   const getQuote = () => {
-    return(
+    return (
       <div>
-        <h2>{quote['content']}</h2>
-        <h3>~ {quote['author_name']}</h3>
+        <h2>{quote["content"]}</h2>
+        <h3>~ {quote["author_name"]}</h3>
       </div>
-    )
-  }
+    );
+  };
 
   console.log(messages);
 
@@ -58,19 +58,19 @@ function StudentDashboard({ setAuth }) {
   };
 
   const submit = async () => {
-    try{
+    try {
       const results = {
         answer1: answer1,
         answer2: answer2,
         answer3: answer3,
         answer4: answer4,
-        answer5: answer5
-      }
+        answer5: answer5,
+      };
       console.log(results);
     } catch (err) {
-        console.log(err.message);
+      console.log(err.message);
     }
-  }
+  };
 
   const selectResponse = (setState, name) => {
     return (
@@ -129,14 +129,9 @@ function StudentDashboard({ setAuth }) {
     );
   };
 
-
   const survey = () => {
     if (completed) {
-      return(
-        <div>
-          {getQuote()}
-        </div>
-      )
+      return <div>{getQuote()}</div>;
     } else {
       return (
         <div>
@@ -149,16 +144,18 @@ function StudentDashboard({ setAuth }) {
           <div>Question4</div>
           {selectResponse(setAnswer4, "q4")}
           <div>Question5</div>
-          {selectResponse(setAnswer5, 'q5')}
+          {selectResponse(setAnswer5, "q5")}
           <button
             className="btn btn-primary btn-sm "
             onClick={() => submit()}
             id="submit"
-          >Submit</button>
+          >
+            Submit
+          </button>
         </div>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div>
@@ -183,7 +180,7 @@ function StudentDashboard({ setAuth }) {
         Logout
       </button>
       {survey()}
-      </div>
+    </div>
   );
 }
 
