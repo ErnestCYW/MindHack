@@ -19,6 +19,7 @@ toast.configure();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
@@ -32,9 +33,12 @@ function App() {
       });
 
       const parseRes = await response.json();
+      const isVerified = parseRes.isVerified;
 
-      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
-      console.log(isAuthenticated);
+      isVerified === true
+        ? setIsAuthenticated(true)
+        : setIsAuthenticated(false);
+      setIsAdmin(parseRes.isAdmin);
     } catch (err) {
       console.error(err.message);
     }
@@ -55,6 +59,8 @@ function App() {
               render={(props) =>
                 !isAuthenticated ? (
                   <Login {...props} setAuth={setAuth} />
+                ) : isAdmin ? (
+                  <Redirect to="/adminDashboard" />
                 ) : (
                   <Redirect to="/studentDashboard" />
                 )

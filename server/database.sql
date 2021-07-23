@@ -8,7 +8,7 @@ CREATE TABLE users (
   user_name VARCHAR(100) NOT NULL,
   user_email VARCHAR(100) NOT NULL,
   user_password VARCHAR(100) NOT NULL,
-  is_admin BOOLEAN 
+  is_admin BOOLEAN DEFAULT false
 );
 
 --Testing Insert 

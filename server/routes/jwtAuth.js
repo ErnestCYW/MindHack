@@ -93,7 +93,11 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/is-verify", authorization, async (req, res) => {
   try {
     //Because of timeout may need to relogin to reverify
-    res.json(true);
+    const isAdmin = await pool.query(
+      "SELECT is_admin FROM users WHERE user_id = $1",
+      [req.user]
+    );
+    res.json({isVerified : true, isAdmin : isAdmin.rows[0].is_admin});
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
