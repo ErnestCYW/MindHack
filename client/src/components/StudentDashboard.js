@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 function StudentDashboard({ setAuth }) {
   const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
+  const [quote, setQuote] = useState(null);
+  const [completed, setCompleted] = useState(false);
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
@@ -19,9 +21,14 @@ function StudentDashboard({ setAuth }) {
 
       const parseRes = await response.json();
       const messages = JSON.parse(parseRes.messages);
+      const quote = JSON.parse(parseRes.quote);
+      const completed = JSON.parse(parseRes.has_done_daily_declaration)
+      console.log(quote);
 
       setName(parseRes.user_name);
-      setMessages(messages)
+      setMessages(messages);
+      setQuote(quote);
+      setCompleted(completed);
     } catch (err) {
       console.error(err.message);
     }
@@ -30,6 +37,15 @@ function StudentDashboard({ setAuth }) {
   useEffect( () => {
     getAll();
   }, []);
+
+  const getQuote = () => {
+    return(
+      <div>
+        <h2>{quote['content']}</h2>
+        <h3>~ {quote['author_name']}</h3>
+      </div>
+    )
+  }
 
   console.log(messages);
 
@@ -83,13 +99,11 @@ function StudentDashboard({ setAuth }) {
     )
   }
 
-  const completed = true;
-
   const survey = () => {
     if (completed) {
       return(
         <div>
-          <h2>Quote of the day!</h2>
+          {getQuote()}
         </div>
       )
     } else {
