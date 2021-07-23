@@ -68,6 +68,7 @@ function App() {
                   <Register {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/studentDashboard" />
+<<<<<<< HEAD
                 )
               }
             />
@@ -79,6 +80,8 @@ function App() {
                   <StudentDashboard {...props} setAuth={setAuth} />
                 ) : (
                   <Redirect to="/login" />
+=======
+>>>>>>> 9917b905f0003aca77abba740ceabfc02aac7c0e
                 )
               }
             />
