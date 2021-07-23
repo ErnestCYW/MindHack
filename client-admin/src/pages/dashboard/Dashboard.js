@@ -19,51 +19,58 @@ import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 
-const q1data = [
-  { name: "1", value: 1, color: "primary" },
-  { name: "2", value: 1, color: "secondary" },
-  { name: "3", value: 1, color: "warning" },
-  { name: "4", value: 1, color: "success" },
-  { name: "5", value: 1, color: "info" },
-];
 
-const q2data = [
-  { name: "1", value: 2, color: "primary" },
-  { name: "2", value: 2, color: "secondary" },
-  { name: "3", value: 2, color: "warning" },
-  { name: "4", value: 2, color: "success" },
-  { name: "5", value: 2, color: "info" },
-];
-
-const q3data = [
-  { name: "1", value: 3, color: "primary" },
-  { name: "2", value: 3, color: "secondary" },
-  { name: "3", value: 3, color: "warning" },
-  { name: "4", value: 3, color: "success" },
-  { name: "5", value: 3, color: "info" },
-];
-
-const q4data = [
-  { name: "1", value: 4, color: "primary" },
-  { name: "2", value: 4, color: "secondary" },
-  { name: "3", value: 4, color: "warning" },
-  { name: "4", value: 4, color: "success" },
-  { name: "5", value: 4, color: "info" },
-];
-
-const q5data = [
-  { name: "1", value: 5, color: "primary" },
-  { name: "2", value: 5, color: "secondary" },
-  { name: "3", value: 5, color: "warning" },
-  { name: "4", value: 5, color: "success" },
-  { name: "5", value: 5, color: "info" },
-];
 
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
   const [numResponses, setNumResponses] = useState(0);
   const [numStudents, setNumStudents] = useState(0);
+  const [q1Data, setQ1Data] = useState([0,0,0,0,0]);
+  const [q2Data, setQ2Data] = useState([0,0,0,0,0]);
+  const [q3Data, setQ3Data] = useState([0,0,0,0,0]);
+  const [q4Data, setQ4Data] = useState([0,0,0,0,0]);
+  const [q5Data, setQ5Data] = useState([0,0,0,0,0]);
+
+  const q1data = [
+    { name: "1", value: q1Data[0], color: "primary" },
+    { name: "2", value: q1Data[1], color: "secondary" },
+    { name: "3", value: q1Data[2], color: "warning" },
+    { name: "4", value: q1Data[3], color: "success" },
+    { name: "5", value: q1Data[4], color: "info" },
+  ];
+  
+  const q2data = [
+    { name: "1", value: q2Data[0], color: "primary" },
+    { name: "2", value: q2Data[1], color: "secondary" },
+    { name: "3", value: q2Data[2], color: "warning" },
+    { name: "4", value: q2Data[3], color: "success" },
+    { name: "5", value: q2Data[4], color: "info" },
+  ];
+  
+  const q3data = [
+    { name: "1", value: q3Data[0], color: "primary" },
+    { name: "2", value: q3Data[1], color: "secondary" },
+    { name: "3", value: q3Data[2], color: "warning" },
+    { name: "4", value: q3Data[3], color: "success" },
+    { name: "5", value: q3Data[4], color: "info" },
+  ]
+
+  const q4data = [
+    { name: "1", value: q4Data[0], color: "primary" },
+    { name: "2", value: q4Data[1], color: "secondary" },
+    { name: "3", value: q4Data[2], color: "warning" },
+    { name: "4", value: q4Data[3], color: "success" },
+    { name: "5", value: q4Data[4], color: "info" },
+  ];
+  
+  const q5data = [
+    { name: "1", value: q5Data[0], color: "primary" },
+    { name: "2", value: q5Data[1], color: "secondary" },
+    { name: "3", value: q5Data[2], color: "warning" },
+    { name: "4", value: q5Data[3], color: "success" },
+    { name: "5", value: q5Data[4], color: "info" },
+  ];
 
   const getAll = async () => {
     try {
@@ -93,7 +100,11 @@ export default function Dashboard(props) {
         q4Total[res.answer4 - 1] += 1;
         q5Total[res.answer5 - 1] += 1;
       });
-      console.log(q1Total);
+      setQ1Data(q1Total);
+      setQ2Data(q2Total);
+      setQ3Data(q3Total);
+      setQ4Data(q4Total);
+      setQ5Data(q5Total);
     } catch (err) {
       console.error(err.message);
     }
