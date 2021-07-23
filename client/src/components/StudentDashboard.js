@@ -170,8 +170,9 @@ function StudentDashboard({ setAuth }) {
             placeholder="Enter your message here!"
             value={newMessage}
             onChange={(msg) => setNewMessage(msg.target.value)}
+            style={{width : "500px"}}
           />
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="btn btn-primary"/>
         </form>
       </div>
     );
@@ -179,59 +180,97 @@ function StudentDashboard({ setAuth }) {
 
   const submitMessage = async (e) => {
     e.preventDefault();
-    //alert('A name was submitted: ' + newMessage);
-    console.log(newMessage);
-    try {
-      const response = await fetch(
-        "http://localhost:5000/studentDashboard/submitMessage/",
-        {
-          method: "POST",
-          headers: {
-            token: localStorage.token, //from middleware
-            newMessage: newMessage,
-          },
-        }
-      );
-      setNewMessage("");
-      getAll();
-    } catch (err) {
-      console.log(err.message);
+    if (newMessage!="") {
+      console.log(newMessage);
+      try {
+        const response = await fetch(
+          "http://localhost:5000/studentDashboard/submitMessage/",
+          {
+            method: "POST",
+            headers: {
+              token: localStorage.token, //from middleware
+              newMessage: newMessage,
+            },
+          }
+        );
+        setNewMessage("");
+        getAll();
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   };
 
+  let styles = {
+    header: {
+      paddingTop: 20,
+      paddingBottom: 20, 
+      paddingLeft: 60,
+      paddingRight: 60,
+      backgroundColor: '#5C6BC0',
+    },
+    headerText: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 20,
+    },
+    button: {
+      borderColor: 'white',
+      borderWidth: 2,
+      backgroundColor: '#5C6BC0',
+      color: 'white',
+      marginLeft: 20,
+    },
+    input: {
+      width : "500px"
+    }
+  }
+
   return (
     <div>
+      <div class="d-flex justify-content-between" style={styles.header}>
+        <div style={styles.headerText}>Mind Hack</div>
+        <div class="d-flex justify-content-between" >
+          <div style={styles.headerText}>Welcome {name}!</div>
+          <button
+            className="btn btn-primary btn-sm "
+            onClick={(e) => logout(e)}
+            id="logout"
+            style={styles.button}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+
       <div className="row">
         <nav
           id="sidebarMenu"
           class="col-md-3 d-md-block sidebar collapse position-fixed shadow p-3 mb-5 rounded bg-light"
           style = {{"height":"100vh"}}
         >
-          <row>
-            <div className="display-6 ms-4">{name}'s Dashboard</div>
-          </row>
+ 
           {survey()}
-          <button
-          className="btn btn-primary btn-sm "
-          onClick={(e) => logout(e)}
-          id="logout"
-        >
-          Logout
-        </button>
+
         </nav>
       </div>
+
       <div className="col-md-9 ms-sm-auto px-md-4">
-        <div className="bg-info">
-          {messages.map((message) => {
-            return (
-              <div>
-                {" "}
-                school: {message.school_name} time: {message.date_time}{" "}
-                contents: {message.message_content}{" "}
-              </div>
-            );
-          })}
-        </div>
+      <div class="row row-cols-1 row-cols-md-2 g-4" style={{marginTop: 10,}}>
+        {messages.map((message) => {
+              return (
+                <div class="card border-primary mb-3" style={{width: 400, marginLeft: 15, marginRight: 15,}}>
+                  <div class="card-body">
+                    <h5 class="card-title">{message.message_content}</h5>
+                  </div>
+                  <div class="card-footer bg-transparent border-success">
+                  <div>{message.school_name}</div>
+                  <div>{message.date_time}</div>
+                  </div>
+                </div>
+              );
+            })}
+      </div> 
         {inputMessage()}
       </div>
     </div>
