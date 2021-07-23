@@ -23,7 +23,7 @@ router.get("/", authorization, async (req, res) => {
     const quote = quotes.rows[Math.floor(Math.random() * quotes.rows.length)];
 
     const declaration_time = await pool.query(
-      "SELECT date_time FROM question \
+      "SELECT date_time FROM answers \
             WHERE user_id = $1 ORDER BY date_time DESC LIMIT 1",
       [req.user]
     );

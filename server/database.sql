@@ -55,14 +55,6 @@ CREATE TABLE answers (
   answer5 INTEGER NOT NULL
 );
 
-CREATE TABLE question2 (
-  user_id UUID REFERENCES users(user_id) NOT NULL,
-  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  score2 INTEGER NOT NULL
-);
-
-
-
 --Quotes
 CREATE TABLE quotes (
     quote_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
