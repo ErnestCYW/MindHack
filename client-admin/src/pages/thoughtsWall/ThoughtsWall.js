@@ -23,23 +23,21 @@ export default function ThoughtsWall() {
 
       const parseRes = await response.json();
       const messages = JSON.parse(parseRes.messages);
-      console.log(parseRes)
+      console.log(parseRes);
       setName(parseRes.user_name);
-      setMessages(messages)
+      setMessages(messages);
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  useEffect( () => {
+  useEffect(() => {
     getAll();
   }, []);
 
   return (
     <Grid container className={classes.container}>
-      <Paper classes={{ root: classes.paperRoot }}>
-        hello
-      </Paper>
+      <Paper classes={{ root: classes.paperRoot }}>hello</Paper>
     </Grid>
   );
 }

@@ -98,9 +98,9 @@ SELECT users.user_name, schools.school_name, question1.score1, question1.date_ti
 SELECT * FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN question1 ON question1.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND users.is_admin = 'f';
 
 -- Get all question scores from one user 
-INSERT INTO question1 (user_id, date_time, score1) VALUES ('c81d5410-3e62-412c-96be-86e2bcb682b1', NOW(), 5) 
+INSERT INTO answers (user_id, date_time, answer1, answer2, answer3, answer4, answer5) VALUES ('c81d5410-3e62-412c-96be-86e2bcb682b1', NOW(), 5, 4, 3, 4, 1);
 
-SELECT * FROM question1 WHERE user_id = 'c81d5410-3e62-412c-96be-86e2bcb682b1' ORDER BY date_time DESC;
+SELECT * FROM answers WHERE user_id = 'c81d5410-3e62-412c-96be-86e2bcb682b1' ORDER BY date_time DESC;
 
 
 
