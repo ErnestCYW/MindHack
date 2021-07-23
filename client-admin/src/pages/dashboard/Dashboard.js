@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import {
   Grid,
-  LinearProgress,
   Select,
   OutlinedInput,
   MenuItem,
-  Button
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import {
   ResponsiveContainer,
   ComposedChart,
-  AreaChart,
   LineChart,
   Line,
   Area,
@@ -31,7 +28,6 @@ import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
-import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 
 const mainChartData = getMainChartData();
