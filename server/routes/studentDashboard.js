@@ -18,10 +18,17 @@ router.get("/", authorization, async (req, res) => {
             [req.user]
         );
 
+        const declaration_time = await pool.query(
+            "SELECT date_time FROM question ORDER BY date_time DESC \
+            WHERE user_id = $1",
+            [req.user]
+        );
+
         const toReturn = {
             user_name: user.rows[0].user_name,
-            messages: JSON.stringify(messages.rows)
-        }
+            messages: JSON.stringify(messages.rows),
+            has_done_daily_declaration: true,
+        };
 
         res.json(toReturn);
     } catch (err) {
