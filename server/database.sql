@@ -45,11 +45,23 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Jun
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'NUS');
 
 --Check in question 1, 2, 3, 4, 5 
-CREATE TABLE question1 (
+CREATE TABLE question (
   user_id UUID REFERENCES users(user_id) NOT NULL,
   date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  score INTEGER NOT NULL
+  answer1 INTEGER NOT NULL,
+  answer2 INTEGER NOT NULL,
+  answer3 INTEGER NOT NULL,
+  answer4 INTEGER NOT NULL,
+  answer5 INTEGER NOT NULL
 );
+
+CREATE TABLE question2 (
+  user_id UUID REFERENCES users(user_id) NOT NULL,
+  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  score2 INTEGER NOT NULL
+);
+
+
 
 --Quotes
 CREATE TABLE quotes (
@@ -78,3 +90,18 @@ INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Marilyn Monr
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Jane Fonda', 'It’s never too late – never too late to start over, never too late to be happy.');
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Henry David Thoreau', 'Go confidently in the direction of your dreams.  Live the life you have imagined.');
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'George Eliot', 'It is never too late to be what you might have been.');
+
+
+--LEFT JOIN query (Tim's)
+SELECT users.user_name, schools.school_name, question1.score1, question1.date_time FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN question1 ON question1.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89';
+
+SELECT * FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN question1 ON question1.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND users.is_admin = 'f';
+
+-- Get all question scores from one user 
+INSERT INTO question1 (user_id, date_time, score1) VALUES ('c81d5410-3e62-412c-96be-86e2bcb682b1', NOW(), 5) 
+
+SELECT * FROM question1 WHERE user_id = 'c81d5410-3e62-412c-96be-86e2bcb682b1' ORDER BY date_time DESC;
+
+
+
+SELECT * FROM question1 LEFT JOIN users ON question1.user_id = users.user_id LEFT JOIN school_relations ON users.user_id = school_relations.user_id;
