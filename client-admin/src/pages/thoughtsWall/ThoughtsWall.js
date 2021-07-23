@@ -43,13 +43,9 @@ export default function ThoughtsWall() {
 
   return (
     <Grid container className={classes.container}>
-<<<<<<< HEAD
-      <Paper classes={{ root: classes.paperRoot }}>{messages}</Paper>
-=======
       <Paper classes={{ root: classes.paperRoot }}>
         {messages}
       </Paper>
->>>>>>> 10debfd0978fc646a7ee233978442dd065b0bdd9
     </Grid>
   );
 }
