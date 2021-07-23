@@ -42,7 +42,14 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Tampines Meridian
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Temasek Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Victoria Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
-INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'NUS');
+INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'National University of Singapore');
+
+CREATE TABLE school_message_board (
+  school_id UUID REFERENCES schools(school_id) NOT NULL,
+  user_id UUID REFERENCES users(user_id) NOT NULL,
+  message_content TEXT NOT NULL,
+  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 --Check in question 1, 2, 3, 4, 5 
 CREATE TABLE answers (
@@ -93,7 +100,5 @@ SELECT * FROM users LEFT JOIN school_relations ON users.user_id = school_relatio
 INSERT INTO answers (user_id, date_time, answer1, answer2, answer3, answer4, answer5) VALUES ('c81d5410-3e62-412c-96be-86e2bcb682b1', NOW(), 5, 4, 3, 4, 1);
 
 SELECT * FROM answers WHERE user_id = 'c81d5410-3e62-412c-96be-86e2bcb682b1' ORDER BY date_time DESC;
-
-
 
 SELECT * FROM question1 LEFT JOIN users ON question1.user_id = users.user_id LEFT JOIN school_relations ON users.user_id = school_relations.user_id;
