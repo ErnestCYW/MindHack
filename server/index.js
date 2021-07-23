@@ -17,6 +17,8 @@ app.use("/auth", require("./routes/jwtAuth"));
 //studentDashboard route
 app.use("/studentDashboard", require("./routes/studentDashboard"));
 
+app.use("/adminDashboard", require("./routes/adminDashboard"));
+
 app.listen(port, () => {
   console.log(`server has started on port ${port}`);
 });

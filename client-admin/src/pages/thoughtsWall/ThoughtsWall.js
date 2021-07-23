@@ -20,18 +20,10 @@ export default function ThoughtsWall() {
       });
 
       const parseRes = await response.json();
-<<<<<<< HEAD
-      const messages = JSON.parse(parseRes.messages);
+      const messages = parseRes.messages;
       console.log(parseRes);
       setName(parseRes.user_name);
-      setMessages(messages);
-=======
-      const messages = parseRes.messages;
-      console.log(parseRes)
-      setName(parseRes.user_name);
       setMessages(JSON.parse(messages));
-      
->>>>>>> 10debfd0978fc646a7ee233978442dd065b0bdd9
     } catch (err) {
       console.error(err.message);
     }
@@ -43,13 +35,7 @@ export default function ThoughtsWall() {
 
   return (
     <Grid container className={classes.container}>
-<<<<<<< HEAD
       <Paper classes={{ root: classes.paperRoot }}>{messages}</Paper>
-=======
-      <Paper classes={{ root: classes.paperRoot }}>
-        {messages}
-      </Paper>
->>>>>>> 10debfd0978fc646a7ee233978442dd065b0bdd9
     </Grid>
   );
 }
