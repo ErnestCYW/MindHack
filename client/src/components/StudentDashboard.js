@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 function StudentDashboard({ setAuth }) {
   const [name, setName] = useState("");
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState([]);
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
@@ -41,6 +41,7 @@ function StudentDashboard({ setAuth }) {
     toast.success("Logged out successfully");
   };
 
+<<<<<<< HEAD
   const submit = () => {
     const results = {
       answer1: answer1,
@@ -51,6 +52,22 @@ function StudentDashboard({ setAuth }) {
     };
     console.log(results);
   };
+=======
+  const submit = async () => {
+    try{
+      const results = {
+        answer1: answer1,
+        answer2: answer2,
+        answer3: answer3,
+        answer4: answer4,
+        answer5: answer5
+      }
+      console.log(results);
+    } catch (err) {
+        console.log(err.message);
+    }
+  }
+>>>>>>> c7784b5ed8f1c9f2afefdbfe2e26661111ac3d68
 
   const selectResponse = (setState, name) => {
     return (
@@ -109,6 +126,41 @@ function StudentDashboard({ setAuth }) {
     );
   };
 
+<<<<<<< HEAD
+=======
+  const completed = true;
+
+  const survey = () => {
+    if (completed) {
+      return(
+        <div>
+          <h2>Quote of the day!</h2>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div>How happy are you today?</div>
+          {selectResponse(setAnswer1, "q1")}
+          <div>How stressed are you today?</div>
+          {selectResponse(setAnswer2, "q2")}
+          <div>Question3</div>
+          {selectResponse(setAnswer3, "q3")}
+          <div>Question4</div>
+          {selectResponse(setAnswer4, "q4")}
+          <div>Question5</div>
+          {selectResponse(setAnswer5, 'q5')}
+          <button
+            className="btn btn-primary btn-sm "
+            onClick={() => submit()}
+            id="submit"
+          >Submit</button>
+        </div>
+      )
+    }
+  }
+
+>>>>>>> c7784b5ed8f1c9f2afefdbfe2e26661111ac3d68
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
@@ -131,6 +183,7 @@ function StudentDashboard({ setAuth }) {
       >
         Logout
       </button>
+<<<<<<< HEAD
       <div>How happy are you today?</div>
       {selectResponse(setAnswer1, "q1")}
       <div>How stressed are you today?</div>
@@ -149,6 +202,10 @@ function StudentDashboard({ setAuth }) {
         Submit
       </button>
     </div>
+=======
+      {survey()}
+      </div>
+>>>>>>> c7784b5ed8f1c9f2afefdbfe2e26661111ac3d68
   );
 }
 

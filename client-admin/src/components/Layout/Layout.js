@@ -11,6 +11,7 @@ import Sidebar from "../Sidebar";
 
 // pages
 import Dashboard from "../../pages/dashboard";
+import ThoughtsWall from "../../pages/thoughtsWall";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";

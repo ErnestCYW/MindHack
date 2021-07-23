@@ -4,6 +4,7 @@ const authorization = require("../middleware/authorization");
 const router = require("./jwtAuth");
 
 router.get("/", authorization, async (req, res) => {
+    console.log(req)
     try {
         const user = await pool.query(
             "SELECT user_name FROM users WHERE user_id = $1",
@@ -18,16 +19,24 @@ router.get("/", authorization, async (req, res) => {
             [req.user]
         );
 
+        const quotes = await pool.query(
+            "SELECT author_name, content FROM quotes"
+        );
+        const quote = quotes.rows[Math.floor(Math.random()*quotes.rows.length)];
+
+        /*
         const declaration_time = await pool.query(
-            "SELECT date_time FROM question ORDER BY date_time DESC \
+            "SELECT author_name, content FROM question ORDER BY date_time DESC \
             WHERE user_id = $1",
             [req.user]
         );
+        */
 
         const toReturn = {
             user_name: user.rows[0].user_name,
             messages: JSON.stringify(messages.rows),
             has_done_daily_declaration: true,
+            quote: JSON.stringify(quote)
         };
 
         res.json(toReturn);
