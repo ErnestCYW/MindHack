@@ -80,20 +80,20 @@ export default function Dashboard(props) {
       setNumStudents(totalStudents);
 
       const overallResponse = JSON.parse(parseRes.overallResponse);
-      console.log(overallResponse)
-      let q1Total = [0,0,0,0,0];
-      let q2Total = [0,0,0,0,0];
-      let q3Total = [0,0,0,0,0];
-      let q4Total = [0,0,0,0,0];
-      let q5Total = [0,0,0,0,0];
-      overallResponse.forEach(res => {
-        q1Total[res.answer1-1] += 1;
-        q2Total[res.answer2-1] += 1;
-        q3Total[res.answer3-1] += 1;
-        q4Total[res.answer4-1] += 1;
-        q5Total[res.answer5-1] += 1;
-      })
-      console.log(q1Total)
+      console.log(overallResponse);
+      let q1Total = [0, 0, 0, 0, 0];
+      let q2Total = [0, 0, 0, 0, 0];
+      let q3Total = [0, 0, 0, 0, 0];
+      let q4Total = [0, 0, 0, 0, 0];
+      let q5Total = [0, 0, 0, 0, 0];
+      overallResponse.forEach((res) => {
+        q1Total[res.answer1 - 1] += 1;
+        q2Total[res.answer2 - 1] += 1;
+        q3Total[res.answer3 - 1] += 1;
+        q4Total[res.answer4 - 1] += 1;
+        q5Total[res.answer5 - 1] += 1;
+      });
+      console.log(q1Total);
     } catch (err) {
       console.error(err.message);
     }

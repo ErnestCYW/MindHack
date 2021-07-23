@@ -1,6 +1,6 @@
  INSERT INTO school_relations (school_id, user_id) VALUES ('4cc70458-2265-41f5-9e1e-e24b8e5f4f89', 'd0f686da-bec1-41f6-8cb7-516fd142be26');
   INSERT INTO school_relations (school_id, user_id) VALUES ('4cc70458-2265-41f5-9e1e-e24b8e5f4f89', 'a1284e3d-357e-45bf-8fda-e600b3b7e878'); 
-   INSERT INTO school_relations (school_id, user_id) VALUES ('4cc70458-2265-41f5-9e1e-e24b8e5f4f89', '3676bfc4-c8b5-45e6-bcd4-abcd610b92d'); 
+   INSERT INTO school_relations (school_id, user_id) VALUES ('4cc70458-2265-41f5-9e1e-e24b8e5f4f89', '3676bfc4-c8b5-45e6-bcd4-abcd610b92dc'); 
     INSERT INTO school_relations (school_id, user_id) VALUES ('4cc70458-2265-41f5-9e1e-e24b8e5f4f89', '8f6d75b6-4d09-4c9f-aa36-3c35facb0f80' ); 
      INSERT INTO school_relations (school_id, user_id) VALUES ('4cc70458-2265-41f5-9e1e-e24b8e5f4f89', 'e0950c01-6ea8-406b-b70e-3c8d0b314c83');
 
