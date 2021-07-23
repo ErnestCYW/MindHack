@@ -30,7 +30,7 @@ router.get("/", authorization, async (req, res) => {
     const toReturn = {
       totalStudents: totalStudents.rows[0].count,
       totalRespondedToday: totalRespondedToday.rows[0].count,
-      overallResponse: JSON.stringify(overallResponse),
+      overallResponse: JSON.stringify(overallResponse.rows),
     };
 
     res.json(toReturn);

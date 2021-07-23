@@ -62,8 +62,8 @@ const q5data = [
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
-  const [numResponses, setNumResponses] = useState(1);
-  const [numStudents, setNumStudents] = useState(3);
+  const [numResponses, setNumResponses] = useState(0);
+  const [numStudents, setNumStudents] = useState(0);
 
   const getAll = async () => {
     try {
@@ -75,7 +75,25 @@ export default function Dashboard(props) {
       const parseRes = await response.json();
       const totalStudents = parseRes.totalStudents;
       const totalRespondedToday = parseRes.totalRespondedToday;
+
+      setNumResponses(totalRespondedToday);
+      setNumStudents(totalStudents);
+
       const overallResponse = JSON.parse(parseRes.overallResponse);
+      console.log(overallResponse)
+      let q1Total = [0,0,0,0,0];
+      let q2Total = [0,0,0,0,0];
+      let q3Total = [0,0,0,0,0];
+      let q4Total = [0,0,0,0,0];
+      let q5Total = [0,0,0,0,0];
+      overallResponse.forEach(res => {
+        q1Total[res.answer1-1] += 1;
+        q2Total[res.answer2-1] += 1;
+        q3Total[res.answer3-1] += 1;
+        q4Total[res.answer4-1] += 1;
+        q5Total[res.answer5-1] += 1;
+      })
+      console.log(q1Total)
     } catch (err) {
       console.error(err.message);
     }
