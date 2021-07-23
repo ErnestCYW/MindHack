@@ -6,6 +6,7 @@ function StudentDashboard({ setAuth }) {
   const [messages, setMessages] = useState([]);
   const [quote, setQuote] = useState(null);
   const [completed, setCompleted] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
@@ -28,7 +29,7 @@ function StudentDashboard({ setAuth }) {
       setName(parseRes.user_name);
       setMessages(messages);
       setQuote(quote);
-      //setCompleted(completed);
+      setCompleted(completed);
     } catch (err) {
       console.error(err.message);
     }
@@ -160,6 +161,23 @@ function StudentDashboard({ setAuth }) {
     }
   };
 
+  const inputMessage = () => {
+    return(
+      <div>
+        <form onSubmit={submitMessage}>
+          <textarea placeholder="Enter your message here!"
+                value={newMessage}
+                onChange={(msg) => setNewMessage(msg.target.value)} />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    )
+  }
+
+  const submitMessage = (e) => {
+    alert('A name was submitted: ' + newMessage);
+  }
+
   return (
     <div>
       <div className="display-1">Student Dashboard</div>
@@ -183,6 +201,7 @@ function StudentDashboard({ setAuth }) {
         Logout
       </button>
       {survey()}
+      {inputMessage()}
     </div>
   );
 }
