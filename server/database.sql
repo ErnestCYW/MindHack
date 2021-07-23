@@ -42,7 +42,7 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Tampines Meridian
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Temasek Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Victoria Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
-INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'NUS');
+INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'National University of Singapore');
 
 CREATE TABLE school_message_board (
   school_id UUID REFERENCES schools(school_id) NOT NULL,
@@ -61,14 +61,6 @@ CREATE TABLE question (
   answer4 INTEGER NOT NULL,
   answer5 INTEGER NOT NULL
 );
-
-CREATE TABLE question2 (
-  user_id UUID REFERENCES users(user_id) NOT NULL,
-  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  score2 INTEGER NOT NULL
-);
-
-
 
 --Quotes
 CREATE TABLE quotes (
