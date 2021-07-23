@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Route,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import classnames from "classnames";
 
 // styles
@@ -15,6 +11,7 @@ import Sidebar from "../Sidebar";
 
 // pages
 import Dashboard from "../../pages/dashboard";
+import ThoughtsWall from "../../pages/thoughtsWall";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -27,20 +24,20 @@ function Layout(props) {
 
   return (
     <div className={classes.root}>
-        <>
-          <Header history={props.history} />
-          <Sidebar />
-          <div
-            className={classnames(classes.content, {
-              [classes.contentShift]: layoutState.isSidebarOpened,
-            })}
-          >
-            <div className={classes.fakeToolbar} />
-            <Switch>
-              <Route path="/app/dashboard" component={Dashboard} />
-            </Switch>
-          </div>
-        </>
+      <>
+        <Header history={props.history} setAuth={props.setAuth} />
+        <Sidebar />
+        <div
+          className={classnames(classes.content, {
+            [classes.contentShift]: layoutState.isSidebarOpened,
+          })}
+        >
+          <div className={classes.fakeToolbar} />
+          <Switch>
+            <Route path="/app/dashboard" component={Dashboard} />
+          </Switch>
+        </div>
+      </>
     </div>
   );
 }
