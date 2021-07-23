@@ -5,6 +5,11 @@ const authorization = require("../middleware/authorization");
 
 router.get("/", authorization, async (req, res) => {
   try {
+    const user_name = await pool.query(
+      "SELECT user_name FROM users WHERE user_id = $1",
+      [req.user]
+    );
+
     const currSchool = await pool.query(
       "SELECT school_id FROM school_relations WHERE user_id = $1",
       [req.user]
@@ -27,10 +32,17 @@ router.get("/", authorization, async (req, res) => {
       [currSchool.rows[0].school_id]
     );
 
+    const dangerStudents = await pool.query(
+      "SELECT users.user_name, answers.answer1 + answers.answer2 + answers.answer3 + answers.answer4 + answers.answer5 AS total_score FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND date_time::date = CURRENT_DATE AND (answers.answer1 + answers.answer2 + answers.answer3 + answers.answer4 + answers.answer5) < 10",
+      [currSchool.rows[0].school_id]
+    );
+
     const toReturn = {
+      user_name: user_name.rows[0].user_name,
       totalStudents: totalStudents.rows[0].count,
       totalRespondedToday: totalRespondedToday.rows[0].count,
       overallResponse: JSON.stringify(overallResponse.rows),
+      dangerStudents: JSON.stringify(dangerStudents.rows),
     };
 
     res.json(toReturn);

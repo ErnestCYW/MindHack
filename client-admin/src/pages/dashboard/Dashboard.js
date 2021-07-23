@@ -378,6 +378,43 @@ export default function Dashboard(props) {
             </Grid>
           </Widget>
         </Grid>
+
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Widget
+            title="Students to Note"
+            upperTitle
+            bodyClass={classes.fullHeightBody}
+            className={classes.card}
+          >
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Grid item xs={4}>
+                <Typography color="text" colorBrightness="secondary" noWrap>
+                  Total Students
+                </Typography>
+                <Typography size="md">{numStudents}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="text" colorBrightness="secondary" noWrap>
+                  Number who responded today
+                </Typography>
+                <Typography size="md">{numResponses}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="text" colorBrightness="secondary" noWrap>
+                  Completion Rate
+                </Typography>
+                <Typography size="md">
+                  {(numResponses / numStudents).toFixed(4) * 100}%
+                </Typography>
+              </Grid>
+            </Grid>
+          </Widget>
+        </Grid>
       </Grid>
     </>
   );
