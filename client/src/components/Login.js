@@ -31,7 +31,7 @@ const Login = ({ setAuth }) => {
         localStorage.setItem("token", parseRes.token);
 
         setAuth(true);
-        toast.success("login successfully");
+        toast.success("Login successful");
       } else {
         setAuth(false);
 
@@ -43,16 +43,26 @@ const Login = ({ setAuth }) => {
   };
 
   return (
-    <div className="authentication">
-      <div className="form-container">
-        <div className="form-content-left">
-          <h1 className="text-center my-5">Login</h1>
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1457131760772-7017c6180f05?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1336&q=80')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: "100vh",
+        overflowY: "hidden",
+      }}
+    >
+      <div className="d-flex form-container" style={{ height: "50vh" }}>
+        <div className="d-flex form-content-left justify-content-center align-items-center bg-light">
+          <h1 className="text-center m-5 display-4">Login</h1>
         </div>
 
-        <div className="form-content-right">
-          <form onSubmit={onSubmitForm} className="form">
-            <div className="form-inputs">
-              <label htmlFor="email" className="form-label">
+        <div className="form-content-right d-flex form-content-left justify-content-center align-items-center bg-dark">
+          <form onSubmit={onSubmitForm} className="form m-5">
+            <div className="form-inputs d-flex justify-content-between align-items-center">
+              <label htmlFor="email" className="form-label text-white m-4">
                 Email
               </label>
               <input
@@ -66,8 +76,8 @@ const Login = ({ setAuth }) => {
               {errors.email && <p>{errors.email}</p>}
             </div>
 
-            <div className="form-inputs">
-              <label htmlFor="password" className="form-label">
+            <div className="form-inputs d-flex justify-content-between align-items-center">
+              <label htmlFor="password" className="form-label text-white m-4">
                 Password
               </label>
               <input
@@ -80,12 +90,17 @@ const Login = ({ setAuth }) => {
               />
               {errors.password && <p>{errors.password}</p>}
             </div>
-            <button className="form-input-btn" type="submit">
-              Submit
-            </button>
-            <span className="form-input-login">
-              Register <a href="/register">here</a>
-            </span>
+            <div className="d-flex justify-content-between align-items-center">
+              <button
+                className="form-input-btn btn btn-warning m-4"
+                type="submit"
+              >
+                Submit
+              </button>
+              <span className="form-input-login text-white m-4">
+                Don't Have An Account? Register <a href="/register">here</a>
+              </span>
+            </div>
           </form>
         </div>
       </div>

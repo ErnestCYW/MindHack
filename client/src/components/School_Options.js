@@ -17,7 +17,7 @@ const school_options = [
   "Temasek Junior College",
   "Victoria Junior College",
   "Yishun Innova Junior College",
-  "NUS",
+  "National University of Singapore",
 ];
 
 export default school_options;
