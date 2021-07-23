@@ -8,7 +8,7 @@ CREATE TABLE users (
   user_name VARCHAR(100) NOT NULL,
   user_email VARCHAR(100) NOT NULL,
   user_password VARCHAR(100) NOT NULL,
-  is_admin BOOLEAN NOT NULL,
+  is_admin BOOLEAN 
 );
 
 --School table
@@ -18,7 +18,7 @@ CREATE TABLE schools (
 );
 
 CREATE TABLE school_relations (
-  school_id UUID REFERENCES schools(school_id) NOT NULL
+  school_id UUID REFERENCES schools(school_id) NOT NULL,
   user_id UUID REFERENCES users(user_id) NOT NULL
 );
 
@@ -27,6 +27,7 @@ CREATE TABLE question1 (
   user_id UUID REFERENCES users(user_id) NOT NULL,
   date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   score INTEGER NOT NULL
-)
+);
+
 
 
