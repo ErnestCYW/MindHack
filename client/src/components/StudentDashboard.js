@@ -164,16 +164,20 @@ function StudentDashboard({ setAuth }) {
 
   const inputMessage = () => {
     return (
-      <div>
-        <form onSubmit={submitMessage}>
+      <div class="card border-primary mb-3" style={{width: 400, marginLeft: 15, marginRight: 15,}}>
+      <form onSubmit={submitMessage}>
+        <div class="card-body">
           <textarea
             placeholder="Enter your message here!"
             value={newMessage}
             onChange={(msg) => setNewMessage(msg.target.value)}
-            style={{width : "500px"}}
+            style={styles.input}
           />
+          </div>
+          <div class="card-footer bg-transparent border-success">
           <input type="submit" value="Submit" className="btn btn-primary"/>
-        </form>
+          </div>
+        </form> 
       </div>
     );
   };
@@ -222,14 +226,15 @@ function StudentDashboard({ setAuth }) {
       marginLeft: 20,
     },
     input: {
-      width : "500px"
+      width : "342px",
+      height : "150px",
     }
   }
 
   return (
     <div>
       <div class="d-flex justify-content-between" style={styles.header}>
-        <div style={styles.headerText}>Mind Hack</div>
+        <div style={styles.headerText}>MindHack</div>
         <div class="d-flex justify-content-between" >
           <div style={styles.headerText}>Welcome {name}!</div>
           <button
@@ -270,8 +275,8 @@ function StudentDashboard({ setAuth }) {
                 </div>
               );
             })}
-      </div> 
         {inputMessage()}
+      </div> 
       </div>
     </div>
   );
