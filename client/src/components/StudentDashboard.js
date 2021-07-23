@@ -48,8 +48,6 @@ function StudentDashboard({ setAuth }) {
     );
   };
 
-  console.log(messages);
-
   const logout = (e) => {
     e.preventDefault();
     console.log("Triggered");
@@ -60,18 +58,21 @@ function StudentDashboard({ setAuth }) {
 
   const submitAnswers = async () => {
     try {
-      const response = await fetch( "http://localhost:5000/studentDashboard/submitAnswers/", {
-        method: "GET",
-        headers: { token: localStorage.token }, //from middleware
-      });
-      const results = {
-        answer1: answer1,
-        answer2: answer2,
-        answer3: answer3,
-        answer4: answer4,
-        answer5: answer5,
-      };
-      console.log(results);
+      const response = await fetch(
+        "http://localhost:5000/studentDashboard/submitAnswers/",
+        {
+          method: "POST",
+          headers: {
+            token: localStorage.token, //from middleware
+            answer1: answer1,
+            answer2: answer2,
+            answer3: answer3,
+            answer4: answer4,
+            answer5: answer5,
+          },
+        }
+      );
+      setCompleted(true);
     } catch (err) {
       console.log(err.message);
     }
@@ -162,46 +163,77 @@ function StudentDashboard({ setAuth }) {
   };
 
   const inputMessage = () => {
-    return(
+    return (
       <div>
         <form onSubmit={submitMessage}>
-          <textarea placeholder="Enter your message here!"
-                value={newMessage}
-                onChange={(msg) => setNewMessage(msg.target.value)} />
+          <textarea
+            placeholder="Enter your message here!"
+            value={newMessage}
+            onChange={(msg) => setNewMessage(msg.target.value)}
+          />
           <input type="submit" value="Submit" />
         </form>
       </div>
-    )
-  }
+    );
+  };
 
-  const submitMessage = (e) => {
-    alert('A name was submitted: ' + newMessage);
-  }
+  const submitMessage = async (e) => {
+    e.preventDefault();
+    //alert('A name was submitted: ' + newMessage);
+    console.log(newMessage);
+    try {
+      const response = await fetch(
+        "http://localhost:5000/studentDashboard/submitMessage/",
+        {
+          method: "POST",
+          headers: {
+            token: localStorage.token, //from middleware
+            newMessage: newMessage,
+          },
+        }
+      );
+      setNewMessage("");
+      getAll();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <div>
-      <div className="display-1">Student Dashboard</div>
-      <div className="display-4 bg-warning">Student name: {name}</div>
-      <div className="bg-info">
-        {messages.map((message) => {
-          return (
-            <div>
-              {" "}
-              school: {message.school_name} time: {message.date_time} contents:{" "}
-              {message.message_content}{" "}
-            </div>
-          );
-        })}
+      <div className="row">
+        <nav
+          id="sidebarMenu"
+          class="col-md-3 d-md-block sidebar collapse position-fixed shadow p-3 mb-5 rounded bg-light"
+          style = {{"height":"100vh"}}
+        >
+          <row>
+            <div className="display-6 ms-4">{name}'s Dashboard</div>
+          </row>
+          {survey()}
+          <button
+          className="btn btn-primary btn-sm "
+          onClick={(e) => logout(e)}
+          id="logout"
+        >
+          Logout
+        </button>
+        </nav>
       </div>
-      <button
-        className="btn btn-primary btn-sm "
-        onClick={(e) => logout(e)}
-        id="logout"
-      >
-        Logout
-      </button>
-      {survey()}
-      {inputMessage()}
+      <div className="col-md-9 ms-sm-auto px-md-4">
+        <div className="bg-info">
+          {messages.map((message) => {
+            return (
+              <div>
+                {" "}
+                school: {message.school_name} time: {message.date_time}{" "}
+                contents: {message.message_content}{" "}
+              </div>
+            );
+          })}
+        </div>
+        {inputMessage()}
+      </div>
     </div>
   );
 }
