@@ -30,6 +30,7 @@ router.get("/", authorization, async (req, res) => {
     const currentdate = new Date();
     let has_done_daily_declaration = false;
     if (
+      declaration_time.rows.length > 0 &&
       declaration_time.rows[0].date_time.getFullYear() ===
         currentdate.getFullYear() &&
       declaration_time.rows[0].date_time.getMonth() ===
