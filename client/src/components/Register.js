@@ -4,15 +4,15 @@ import { toast } from "react-toastify";
 const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
     email: "",
-    username: "",
     password: "",
     password2: "",
     name: "",
+    school: "",
   });
   const [errors, setErrors] = useState({});
 
   //destructure
-  const { email, username, password, password2, name } = inputs;
+  const { email, password, password2, name, school } = inputs;
 
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -20,9 +20,10 @@ const Register = ({ setAuth }) => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    console.log(inputs);
 
     try {
-      const body = { email, username, password, password2, name };
+      const body = { email, password, password2, name, school };
 
       const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
@@ -56,22 +57,6 @@ const Register = ({ setAuth }) => {
         <div className="form-content-right">
           <form onSubmit={onSubmitForm} className="form">
             <div className="form-inputs">
-              <label htmlFor="username" className="form-label">
-                Username
-              </label>
-              <input
-                className="form-input"
-                id="username"
-                type="text"
-                name="username"
-                placeholder="Enter your username"
-                value={username}
-                onChange={(e) => onChange(e)}
-              />
-              {errors.username && <p>{errors.username}</p>}
-            </div>
-
-            <div className="form-inputs">
               <label htmlFor="email" className="form-label">
                 Email
               </label>
@@ -92,7 +77,7 @@ const Register = ({ setAuth }) => {
                 Password
               </label>
               <input
-                className="form-input"
+                className="form-input "
                 id="password"
                 type="password"
                 name="password"
@@ -110,7 +95,7 @@ const Register = ({ setAuth }) => {
               <input
                 className="form-input"
                 id="password2"
-                type="password2"
+                type="password"
                 name="password2"
                 placeholder="Confirm your password"
                 value={password2}
@@ -135,7 +120,23 @@ const Register = ({ setAuth }) => {
               {errors.name && <p>{errors.name}</p>}
             </div>
 
-            <button className="form-input-btn" type="submit">
+            <div className="form-inputs">
+              <label htmlFor="school" className="form-label">
+                School
+              </label>
+              <input
+                className="form-input"
+                id="school"
+                type="text"
+                name="school"
+                placeholder="Enter your school"
+                value={school}
+                onChange={(e) => onChange(e)}
+              />
+              {errors.school && <p>{errors.school}</p>}
+            </div>
+
+            <button className="form-input-btn btn btn-primary " type="submit">
               Submit
             </button>
 
