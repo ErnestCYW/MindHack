@@ -38,7 +38,7 @@ export default function ThoughtsWall() {
   return (
     <Grid container className={classes.container}>
       <Paper classes={{ root: classes.paperRoot }}>
-        {messages}
+        hello
       </Paper>
     </Grid>
   );
