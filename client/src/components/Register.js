@@ -51,11 +51,6 @@ const Register = ({ setAuth }) => {
       <div className="form-container">
         <div className="form-content-left">
           <h1 className="text-center my-5">Register</h1>
-          <img
-            className="form-img"
-            // src={require("miscellaneous/sslogo.png").default}
-            alt="spaceship"
-          ></img>
         </div>
 
         <div className="form-content-right">
