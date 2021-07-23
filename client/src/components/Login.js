@@ -84,7 +84,7 @@ const Login = ({ setAuth }) => {
               Submit
             </button>
             <span className="form-input-login">
-              New to ShutterSwipe? Register <a href="/register">here</a>
+              Register <a href="/register">here</a>
             </span>
           </form>
         </div>

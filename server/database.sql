@@ -22,6 +22,25 @@ CREATE TABLE school_relations (
   user_id UUID REFERENCES users(user_id) NOT NULL
 );
 
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Anderson Serangoon Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Anglo-Chinese Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Anglo-Chinese IB Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Catholic Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Dunman High School');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Eunoia Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Hwa Chong Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Jurong Pioneer Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Nanyang Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'National Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Raffles Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'River Valley Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, "Saint Andrew's Junior College");
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, "St. Joseph's Junior College");
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Tampines Meridian Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Temasek Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Victoria Junior College');
+INSERT INTO schools (id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
+
 --Check in question 1, 2, 3, 4, 5 
 CREATE TABLE question1 (
   user_id UUID REFERENCES users(user_id) NOT NULL,
