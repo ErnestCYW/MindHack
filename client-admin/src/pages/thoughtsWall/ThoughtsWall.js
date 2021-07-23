@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import PageTitle from "../../components/PageTitle";
 
 // styles
 import useStyles from "./styles";
-
-// logo
-import logo from "./logo.svg";
 
 export default function ThoughtsWall() {
   var classes = useStyles();
@@ -20,10 +18,10 @@ export default function ThoughtsWall() {
       });
 
       const parseRes = await response.json();
-      const messages = parseRes.messages;
-      console.log(parseRes);
+      const messages = JSON.parse(parseRes.messages);
+
       setName(parseRes.user_name);
-      setMessages(JSON.parse(messages));
+      setMessages(messages);
     } catch (err) {
       console.error(err.message);
     }
@@ -34,8 +32,17 @@ export default function ThoughtsWall() {
   }, []);
 
   return (
-    <Grid container className={classes.container}>
-      <Paper classes={{ root: classes.paperRoot }}>{messages}</Paper>
-    </Grid>
+    <>
+      <PageTitle title="Thoughts Wall" />
+      {messages.map((msg) => {
+        return (
+          <Paper classes={{ root: classes.paperRoot }}>
+            {msg.message_content}
+            <hr />
+            {name}
+          </Paper>
+        );
+      })}
+    </>
   );
 }

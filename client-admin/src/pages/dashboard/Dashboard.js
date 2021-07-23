@@ -1,52 +1,97 @@
-import React, { useState } from "react";
-import { Grid, Select, OutlinedInput, MenuItem } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Grid } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import {
   ResponsiveContainer,
-  ComposedChart,
   LineChart,
   Line,
-  Area,
   PieChart,
   Pie,
   Cell,
-  YAxis,
-  XAxis,
 } from "recharts";
 
 // styles
 import useStyles from "./styles";
 
 // components
-import mock from "./mock";
 import Widget from "../../components/Widget";
 import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
-import BigStat from "./components/BigStat/BigStat";
 
-const mainChartData = getMainChartData();
-const PieChartData = [
-  { name: "Group A", value: 400, color: "primary" },
-  { name: "Group B", value: 300, color: "secondary" },
-  { name: "Group C", value: 300, color: "warning" },
-  { name: "Group D", value: 200, color: "success" },
+const q1data = [
+  { name: "1", value: 1, color: "primary" },
+  { name: "2", value: 1, color: "secondary" },
+  { name: "3", value: 1, color: "warning" },
+  { name: "4", value: 1, color: "success" },
+  { name: "5", value: 1, color: "info" },
+];
+
+const q2data = [
+  { name: "1", value: 2, color: "primary" },
+  { name: "2", value: 2, color: "secondary" },
+  { name: "3", value: 2, color: "warning" },
+  { name: "4", value: 2, color: "success" },
+  { name: "5", value: 2, color: "info" },
+];
+
+const q3data = [
+  { name: "1", value: 3, color: "primary" },
+  { name: "2", value: 3, color: "secondary" },
+  { name: "3", value: 3, color: "warning" },
+  { name: "4", value: 3, color: "success" },
+  { name: "5", value: 3, color: "info" },
+];
+
+const q4data = [
+  { name: "1", value: 4, color: "primary" },
+  { name: "2", value: 4, color: "secondary" },
+  { name: "3", value: 4, color: "warning" },
+  { name: "4", value: 4, color: "success" },
+  { name: "5", value: 4, color: "info" },
+];
+
+const q5data = [
+  { name: "1", value: 5, color: "primary" },
+  { name: "2", value: 5, color: "secondary" },
+  { name: "3", value: 5, color: "warning" },
+  { name: "4", value: 5, color: "success" },
+  { name: "5", value: 5, color: "info" },
 ];
 
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
+  const [numResponses, setNumResponses] = useState(1);
+  const [numStudents, setNumStudents] = useState(3);
 
-  // local
-  var [mainChartState, setMainChartState] = useState("monthly");
+  const getAll = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/adminDashboard/", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
+
+      const parseRes = await response.json();
+      const totalStudents = parseRes.totalStudents;
+      const totalRespondedToday = parseRes.totalRespondedToday;
+      const overallResponse = JSON.parse(parseRes.overallResponse);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
 
   return (
     <>
       <PageTitle title="Dashboard" />
       <Grid container spacing={4}>
-        <Grid item lg={3} md={4} sm={6} xs={12}>
+        <Grid item lg={12} md={12} sm={12} xs={12}>
           <Widget
-            title="Well-being Declared"
+            title="Date"
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
@@ -55,29 +100,8 @@ export default function Dashboard(props) {
               <Grid container item alignItems={"center"}>
                 <Grid item xs={6}>
                   <Typography size="xl" weight="medium" noWrap>
-                    12, 678
+                    {new Date().toLocaleDateString()}
                   </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <LineChart
-                    width={100}
-                    height={30}
-                    data={[
-                      { value: 10 },
-                      { value: 15 },
-                      { value: 10 },
-                      { value: 17 },
-                      { value: 18 },
-                    ]}
-                  >
-                    <Line
-                      type="natural"
-                      dataKey="value"
-                      stroke={theme.palette.success.main}
-                      strokeWidth={2}
-                      dot={false}
-                    />
-                  </LineChart>
                 </Grid>
               </Grid>
             </div>
@@ -89,39 +113,41 @@ export default function Dashboard(props) {
             >
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
-                  Registrations
+                  Total Students
                 </Typography>
-                <Typography size="md">860</Typography>
+                <Typography size="md">{numStudents}</Typography>
               </Grid>
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
-                  Sign Out
+                  Number who responded today
                 </Typography>
-                <Typography size="md">32</Typography>
+                <Typography size="md">{numResponses}</Typography>
               </Grid>
               <Grid item xs={4}>
                 <Typography color="text" colorBrightness="secondary" noWrap>
-                  Rate
+                  Completion Rate
                 </Typography>
-                <Typography size="md">3.25%</Typography>
+                <Typography size="md">
+                  {(numResponses / numStudents).toFixed(4) * 100}%
+                </Typography>
               </Grid>
             </Grid>
           </Widget>
         </Grid>
 
         <Grid item lg={3} md={4} sm={6} xs={12}>
-          <Widget title="Revenue Breakdown" upperTitle className={classes.card}>
+          <Widget title="Q1 Scores" upperTitle className={classes.card}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <ResponsiveContainer width="100%" height={144}>
                   <PieChart>
                     <Pie
-                      data={PieChartData}
+                      data={q1data}
                       innerRadius={30}
                       outerRadius={40}
                       dataKey="value"
                     >
-                      {PieChartData.map((entry, index) => (
+                      {q1data.map((entry, index) => (
                         <Cell
                           key={`cell-${index}`}
                           fill={theme.palette[entry.color].main}
@@ -133,7 +159,7 @@ export default function Dashboard(props) {
               </Grid>
               <Grid item xs={6}>
                 <div className={classes.pieChartLegendWrapper}>
-                  {PieChartData.map(({ name, value, color }, index) => (
+                  {q1data.map(({ name, value, color }, index) => (
                     <div key={color} className={classes.legendItemContainer}>
                       <Dot color={color} />
                       <Typography
@@ -152,51 +178,178 @@ export default function Dashboard(props) {
           </Widget>
         </Grid>
 
-        {mock.bigStat.map((stat) => (
-          <Grid item md={4} sm={6} xs={12} key={stat.product}>
-            <BigStat {...stat} />
-          </Grid>
-        ))}
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <Widget title="Q2 Scores" upperTitle className={classes.card}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <ResponsiveContainer width="100%" height={144}>
+                  <PieChart>
+                    <Pie
+                      data={q2data}
+                      innerRadius={30}
+                      outerRadius={40}
+                      dataKey="value"
+                    >
+                      {q2data.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={theme.palette[entry.color].main}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </Grid>
+              <Grid item xs={6}>
+                <div className={classes.pieChartLegendWrapper}>
+                  {q2data.map(({ name, value, color }, index) => (
+                    <div key={color} className={classes.legendItemContainer}>
+                      <Dot color={color} />
+                      <Typography
+                        style={{ whiteSpace: "nowrap", fontSize: 12 }}
+                      >
+                        &nbsp;{name}&nbsp;
+                      </Typography>
+                      <Typography color="text" colorBrightness="secondary">
+                        &nbsp;{value}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
+              </Grid>
+            </Grid>
+          </Widget>
+        </Grid>
+
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <Widget title="Q3 Scores" upperTitle className={classes.card}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <ResponsiveContainer width="100%" height={144}>
+                  <PieChart>
+                    <Pie
+                      data={q3data}
+                      innerRadius={30}
+                      outerRadius={40}
+                      dataKey="value"
+                    >
+                      {q3data.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={theme.palette[entry.color].main}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </Grid>
+              <Grid item xs={6}>
+                <div className={classes.pieChartLegendWrapper}>
+                  {q3data.map(({ name, value, color }, index) => (
+                    <div key={color} className={classes.legendItemContainer}>
+                      <Dot color={color} />
+                      <Typography
+                        style={{ whiteSpace: "nowrap", fontSize: 12 }}
+                      >
+                        &nbsp;{name}&nbsp;
+                      </Typography>
+                      <Typography color="text" colorBrightness="secondary">
+                        &nbsp;{value}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
+              </Grid>
+            </Grid>
+          </Widget>
+        </Grid>
+
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <Widget title="Q4 Scores" upperTitle className={classes.card}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <ResponsiveContainer width="100%" height={144}>
+                  <PieChart>
+                    <Pie
+                      data={q4data}
+                      innerRadius={30}
+                      outerRadius={40}
+                      dataKey="value"
+                    >
+                      {q4data.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={theme.palette[entry.color].main}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </Grid>
+              <Grid item xs={6}>
+                <div className={classes.pieChartLegendWrapper}>
+                  {q4data.map(({ name, value, color }, index) => (
+                    <div key={color} className={classes.legendItemContainer}>
+                      <Dot color={color} />
+                      <Typography
+                        style={{ whiteSpace: "nowrap", fontSize: 12 }}
+                      >
+                        &nbsp;{name}&nbsp;
+                      </Typography>
+                      <Typography color="text" colorBrightness="secondary">
+                        &nbsp;{value}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
+              </Grid>
+            </Grid>
+          </Widget>
+        </Grid>
+
+        <Grid item lg={3} md={4} sm={6} xs={12}>
+          <Widget title="Q5 Scores" upperTitle className={classes.card}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <ResponsiveContainer width="100%" height={144}>
+                  <PieChart>
+                    <Pie
+                      data={q5data}
+                      innerRadius={30}
+                      outerRadius={40}
+                      dataKey="value"
+                    >
+                      {q5data.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={theme.palette[entry.color].main}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </Grid>
+              <Grid item xs={6}>
+                <div className={classes.pieChartLegendWrapper}>
+                  {q5data.map(({ name, value, color }, index) => (
+                    <div key={color} className={classes.legendItemContainer}>
+                      <Dot color={color} />
+                      <Typography
+                        style={{ whiteSpace: "nowrap", fontSize: 12 }}
+                      >
+                        &nbsp;{name}&nbsp;
+                      </Typography>
+                      <Typography color="text" colorBrightness="secondary">
+                        &nbsp;{value}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
+              </Grid>
+            </Grid>
+          </Widget>
+        </Grid>
       </Grid>
     </>
   );
-}
-
-// #######################################################################
-function getRandomData(length, min, max, multiplier = 10, maxDiff = 10) {
-  var array = new Array(length).fill();
-  let lastValue;
-
-  return array.map((item, index) => {
-    let randomValue = Math.floor(Math.random() * multiplier + 1);
-
-    while (
-      randomValue <= min ||
-      randomValue >= max ||
-      (lastValue && randomValue - lastValue > maxDiff)
-    ) {
-      randomValue = Math.floor(Math.random() * multiplier + 1);
-    }
-
-    lastValue = randomValue;
-
-    return { value: randomValue };
-  });
-}
-
-function getMainChartData() {
-  var resultArray = [];
-  var tablet = getRandomData(31, 3500, 6500, 7500, 1000);
-  var desktop = getRandomData(31, 1500, 7500, 7500, 1500);
-  var mobile = getRandomData(31, 1500, 7500, 7500, 1500);
-
-  for (let i = 0; i < tablet.length; i++) {
-    resultArray.push({
-      tablet: tablet[i].value,
-      desktop: desktop[i].value,
-      mobile: mobile[i].value,
-    });
-  }
-
-  return resultArray;
 }

@@ -40,6 +40,7 @@ export default makeStyles(theme => ({
     paddingLeft: theme.spacing(6),
     paddingRight: theme.spacing(6),
     maxWidth: 404,
+    marginTop: theme.spacing(2)
   },
   textRow: {
     marginBottom: theme.spacing(10),

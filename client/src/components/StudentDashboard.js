@@ -6,6 +6,7 @@ function StudentDashboard({ setAuth }) {
   const [messages, setMessages] = useState([]);
   const [quote, setQuote] = useState(null);
   const [completed, setCompleted] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
   const [answer1, setAnswer1] = useState(null);
   const [answer2, setAnswer2] = useState(null);
   const [answer3, setAnswer3] = useState(null);
@@ -57,11 +58,12 @@ function StudentDashboard({ setAuth }) {
     toast.success("Logged out successfully");
   };
 
-  const submit = async () => {
+  const submitAnswers = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/studentDashboard/submit/"
-      );
+      const response = await fetch( "http://localhost:5000/studentDashboard/submitAnswers/", {
+        method: "GET",
+        headers: { token: localStorage.token }, //from middleware
+      });
       const results = {
         answer1: answer1,
         answer2: answer2,
@@ -150,8 +152,7 @@ function StudentDashboard({ setAuth }) {
           {selectResponse(setAnswer5, "q5")}
           <button
             className="btn btn-primary btn-sm "
-            onClick={() => submit()}
-            id="submit"
+            onClick={() => submitAnswers()}
           >
             Submit
           </button>
@@ -159,6 +160,23 @@ function StudentDashboard({ setAuth }) {
       );
     }
   };
+
+  const inputMessage = () => {
+    return(
+      <div>
+        <form onSubmit={submitMessage}>
+          <textarea placeholder="Enter your message here!"
+                value={newMessage}
+                onChange={(msg) => setNewMessage(msg.target.value)} />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    )
+  }
+
+  const submitMessage = (e) => {
+    alert('A name was submitted: ' + newMessage);
+  }
 
   return (
     <div>
@@ -183,6 +201,7 @@ function StudentDashboard({ setAuth }) {
         Logout
       </button>
       {survey()}
+      {inputMessage()}
     </div>
   );
 }
