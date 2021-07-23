@@ -59,6 +59,9 @@ function StudentDashboard({ setAuth }) {
 
   const submit = async () => {
     try {
+      const response = await fetch(
+        "http://localhost:5000/studentDashboard/submit/"
+      );
       const results = {
         answer1: answer1,
         answer2: answer2,

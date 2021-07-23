@@ -22,13 +22,8 @@ router.get("/", authorization, async (req, res) => {
     const quotes = await pool.query("SELECT author_name, content FROM quotes");
     const quote = quotes.rows[Math.floor(Math.random() * quotes.rows.length)];
 
-<<<<<<< HEAD
-        const declaration_time = await pool.query(
-            "SELECT date_time FROM answers \
-=======
     const declaration_time = await pool.query(
       "SELECT date_time FROM answers \
->>>>>>> d3a6f88ab7ec5d0dcbc2da88147091c768213228
             WHERE user_id = $1 ORDER BY date_time DESC LIMIT 1",
       [req.user]
     );
@@ -57,6 +52,24 @@ router.get("/", authorization, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json("Server Error");
+  }
+});
+
+router.post("/submit", async (req, res) => {
+  try {
+    const response = await pool.query(
+      "INSERT INTO answers (user_id, date_time, answer1, answer2, answer3, answer4, answer5) VALUES ($1, NOW(), $2, $3, $4, $5,6)",
+      [
+        req.user,
+        req.answer1,
+        req.answer2,
+        req.answer3,
+        req.answer4,
+        req.answer5,
+      ]
+    );
+  } catch (err) {
+    console.error(err.message);
   }
 });
 
