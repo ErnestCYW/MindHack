@@ -28,7 +28,7 @@ function StudentDashboard({ setAuth }) {
       setName(parseRes.user_name);
       setMessages(messages);
       setQuote(quote);
-      setCompleted(completed);
+      //setCompleted(completed);
     } catch (err) {
       console.error(err.message);
     }
@@ -57,11 +57,12 @@ function StudentDashboard({ setAuth }) {
     toast.success("Logged out successfully");
   };
 
-  const submit = async () => {
+  const submitAnswers = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/studentDashboard/submit/"
-      );
+      const response = await fetch( "http://localhost:5000/studentDashboard/submitAnswers/", {
+        method: "GET",
+        headers: { token: localStorage.token }, //from middleware
+      });
       const results = {
         answer1: answer1,
         answer2: answer2,
@@ -150,8 +151,7 @@ function StudentDashboard({ setAuth }) {
           {selectResponse(setAnswer5, "q5")}
           <button
             className="btn btn-primary btn-sm "
-            onClick={() => submit()}
-            id="submit"
+            onClick={() => submitAnswers()}
           >
             Submit
           </button>
