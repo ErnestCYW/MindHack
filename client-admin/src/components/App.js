@@ -50,6 +50,17 @@ export default function App() {
   return (
     <Router>
       <Switch>
+      <Route
+          exact
+          path="/"
+          render={(props) =>
+            !isAuthenticated ? (
+              <Login {...props} setAuth={setAuth} />
+            ) : (
+              <Redirect to="/app/dashboard" />
+            )
+          }
+        />
         <Route
           exact
           path="/login"
