@@ -4,8 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import School_Options from "./School_Options";
-import InputLabel from "@material-ui/core/InputLabel"
-import Select from "@material-ui/core/Select"
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -135,42 +134,28 @@ const Register = ({ setAuth }) => {
             </div>
 
             <div className="form-inputs">
-            <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-        <Select
-          native
-          value={school}
-          onChange={(e) => onChange(e)}
-          inputProps={{
-            name: 'age',
-            id: 'age-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
+                   
               <TextField 
+                select
                 className="form-input"
                 id="school"
                 type="text"
                 name="school"
-                placeholder="Enter your school"
+                label="Enter your school"
                 value={school}
                 list="anrede"
-                onChange={(e) => onChange(e)}
-              />
-              {errors.school && <p>{errors.school}</p>}
-            </div>
-            <datalist id="anrede">
-              {School_Options.map((school) => {
-                return <option value={school}></option>;
-              })}
-            </datalist>
+                onChange={(e) => onChange(e)}>
 
-            <button className="form-input-btn btn btn-primary " type="submit">
+              {School_Options.map((school) => {
+                return <MenuItem key={school} value={school}>{school}</MenuItem>;
+              })}
+            
+              </TextField>
+              {errors.school && <p>{errors.school}</p>}
+              </div>
+            <Button className="form-input-btn" variant="contained" color="primary" type="submit">
               Submit
-            </button>
+            </Button>
 
             <span className="form-input-login">
               Already have an account? Login <a href="/login">here</a>

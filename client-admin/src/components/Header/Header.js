@@ -19,7 +19,6 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-import { useUserDispatch, signOut } from "../../context/UserContext";
 
 export default function Header(props) {
   var classes = useStyles();
@@ -36,7 +35,6 @@ export default function Header(props) {
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
-  var userDispatch = useUserDispatch();
 
   // local
   var [profileMenu, setProfileMenu] = useState(null);
@@ -97,7 +95,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          MindStatus Check In for {school}
+          MindHack Overview for <b>{school}</b>
         </Typography>
         <div className={classes.grow} />
 
