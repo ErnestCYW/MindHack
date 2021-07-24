@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 function StudentDashboard({ setAuth }) {
+  //React hooks for user details, answers to daily questions, and message board posts
   const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
   const [quote, setQuote] = useState(null);
@@ -13,6 +14,7 @@ function StudentDashboard({ setAuth }) {
   const [answer4, setAnswer4] = useState(null);
   const [answer5, setAnswer5] = useState(null);
 
+  //Function to get user information from backend (name, quote, messages from school, and if user has completed daily quiz)
   const getAll = async () => {
     try {
       const response = await fetch("http://localhost:5000/studentDashboard/", {
@@ -24,7 +26,6 @@ function StudentDashboard({ setAuth }) {
       const messages = JSON.parse(parseRes.messages);
       const quote = JSON.parse(parseRes.quote);
       const completed = JSON.parse(parseRes.has_done_daily_declaration);
-      console.log(quote);
 
       setName(parseRes.user_name);
       setMessages(messages);
@@ -35,30 +36,23 @@ function StudentDashboard({ setAuth }) {
     }
   };
 
+  //React hook to call getAll(), runs only once!
   useEffect(() => {
     getAll();
   }, []);
 
-  const getQuote = () => {
-    return (
-      <div>
-        <h2>{quote["content"]}</h2>
-        <h3>~ {quote["author_name"]}</h3>
-      </div>
-    );
-  };
-
+  //Logout function, removes JWT token from local storage
   const logout = (e) => {
     e.preventDefault();
-    console.log("Triggered");
     localStorage.removeItem("token");
     setAuth(false);
     toast.success("Logged out successfully");
   };
 
+  //Function to submit daily quiz answers to backend for storage
   const submitAnswers = async () => {
     try {
-      const response = await fetch(
+      await fetch(
         "http://localhost:5000/studentDashboard/submitAnswers/",
         {
           method: "POST",
@@ -78,63 +72,75 @@ function StudentDashboard({ setAuth }) {
     }
   };
 
+  //JSX element to select survey answers and assign to hooks
   const selectResponse = (setState, name) => {
     return (
       <div>
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name={name}
           id="option1"
           onChange={() => setState(1)}
         ></input>
-        <label class="form-check-label" for="option1">
+        <label className="form-check-label" for="option1">
           1
         </label>
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name={name}
           id="option2"
           onChange={() => setState(2)}
         ></input>
-        <label class="form-check-label" for="option2">
+        <label className="form-check-label" for="option2">
           2
         </label>
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name={name}
           id="option3"
           onChange={() => setState(3)}
         ></input>
-        <label class="form-check-label" for="option3">
+        <label className="form-check-label" for="option3">
           3
         </label>
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name={name}
           id="option4"
           onChange={() => setState(4)}
         ></input>
-        <label class="form-check-label" for="option4">
+        <label className="form-check-label" for="option4">
           4
         </label>
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="radio"
           name={name}
           id="option5"
           onChange={() => setState(5)}
         ></input>
-        <label class="form-check-label" for="option5">
+        <label className="form-check-label" for="option5">
           5
         </label>
       </div>
     );
   };
 
+  //JSX function to get and display quote
+  const getQuote = () => {
+    return (
+      <div>
+        <h2>{quote["content"]}</h2>
+        <h3>~ {quote["author_name"]}</h3>
+      </div>
+    );
+  };
+
+  //JSX survey element to display survey questions
   const survey = () => {
     if (completed) {
       return <div>{getQuote()}</div>;
@@ -162,32 +168,37 @@ function StudentDashboard({ setAuth }) {
     }
   };
 
+  //JSX Element for user to input message for message board and assign to hooks
   const inputMessage = () => {
     return (
-      <div class="card border-primary mb-3" style={{width: 400, marginLeft: 15, marginRight: 15,}}>
-      <form onSubmit={submitMessage}>
-        <div class="card-body">
-          <textarea
-            placeholder="Enter your message here!"
-            value={newMessage}
-            onChange={(msg) => setNewMessage(msg.target.value)}
-            style={styles.input}
-          />
+      <div
+        className="card border-primary mb-3"
+        style={{ width: 400, marginLeft: 15, marginRight: 15 }}
+      >
+        <form onSubmit={submitMessage}>
+          <div className="card-body">
+            <textarea
+              placeholder="Enter your message here!"
+              value={newMessage}
+              onChange={(msg) => setNewMessage(msg.target.value)}
+              style={styles.input}
+            />
           </div>
-          <div class="card-footer bg-transparent border-success">
-          <input type="submit" value="Submit" className="btn btn-primary"/>
+          <div className="card-footer bg-transparent border-success">
+            <input type="submit" value="Submit" className="btn btn-primary" />
           </div>
-        </form> 
+        </form>
       </div>
     );
   };
 
+  //Function to submit messages to backend for storage
   const submitMessage = async (e) => {
     e.preventDefault();
-    if (newMessage!="") {
+    if (newMessage !== "") {
       console.log(newMessage);
       try {
-        const response = await fetch(
+        await fetch(
           "http://localhost:5000/studentDashboard/submitMessage/",
           {
             method: "POST",
@@ -198,44 +209,46 @@ function StudentDashboard({ setAuth }) {
           }
         );
         setNewMessage("");
-        getAll();
+        getAll(); //Refreshes message so user's new message appears without reloading page
       } catch (err) {
         console.log(err.message);
       }
     }
   };
 
+  //JSX elements styling
   let styles = {
     header: {
       paddingTop: 20,
-      paddingBottom: 20, 
+      paddingBottom: 20,
       paddingLeft: 60,
       paddingRight: 60,
-      backgroundColor: '#5C6BC0',
+      backgroundColor: "#5C6BC0",
     },
     headerText: {
-      color: 'white',
-      fontWeight: 'bold',
+      color: "white",
+      fontWeight: "bold",
       fontSize: 20,
     },
     button: {
-      borderColor: 'white',
+      borderColor: "white",
       borderWidth: 2,
-      backgroundColor: '#5C6BC0',
-      color: 'white',
+      backgroundColor: "#5C6BC0",
+      color: "white",
       marginLeft: 20,
     },
     input: {
-      width : "342px",
-      height : "150px",
-    }
-  }
+      width: "342px",
+      height: "150px",
+    },
+  };
 
+  //JSX Return Element
   return (
     <div>
-      <div class="d-flex justify-content-between" style={styles.header}>
+      <div className="d-flex justify-content-between" style={styles.header}>
         <div style={styles.headerText}>MindHack</div>
-        <div class="d-flex justify-content-between" >
+        <div className="d-flex justify-content-between">
           <div style={styles.headerText}>Welcome {name}!</div>
           <button
             className="btn btn-primary btn-sm "
@@ -251,32 +264,33 @@ function StudentDashboard({ setAuth }) {
       <div className="row">
         <nav
           id="sidebarMenu"
-          class="col-md-3 d-md-block sidebar collapse position-fixed shadow p-3 mb-5 rounded bg-light"
-          style = {{"height":"100vh"}}
+          className="col-md-3 d-md-block sidebar collapse position-fixed shadow p-3 mb-5 rounded bg-light"
+          style={{ height: "100vh" }}
         >
- 
           {survey()}
-
         </nav>
       </div>
 
       <div className="col-md-9 ms-sm-auto px-md-4">
-      <div class="row row-cols-1 row-cols-md-2 g-4" style={{marginTop: 10,}}>
-        {messages.map((message) => {
-              return (
-                <div class="card border-primary mb-3" style={{width: 400, marginLeft: 15, marginRight: 15,}}>
-                  <div class="card-body">
-                    <h5 class="card-title">{message.message_content}</h5>
-                  </div>
-                  <div class="card-footer bg-transparent border-success">
+        <div className="row row-cols-1 row-cols-md-2 g-4" style={{ marginTop: 10 }}>
+          {messages.map((message) => {
+            return (
+              <div
+                className="card border-primary mb-3"
+                style={{ width: 400, marginLeft: 15, marginRight: 15 }}
+              >
+                <div className="card-body">
+                  <h5 className="card-title">{message.message_content}</h5>
+                </div>
+                <div className="card-footer bg-transparent border-success">
                   <div>{message.school_name}</div>
                   <div>{message.date_time}</div>
-                  </div>
                 </div>
-              );
-            })}
-        {inputMessage()}
-      </div> 
+              </div>
+            );
+          })}
+          {inputMessage()}
+        </div>
       </div>
     </div>
   );

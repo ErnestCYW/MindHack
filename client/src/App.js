@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import "./App.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,21 +9,24 @@ import {
   Redirect,
 } from "react-router-dom";
 
-//components
+//Custom components
 import Login from "./components/Login";
 import Register from "./components/Register";
 import StudentDashboard from "./components/StudentDashboard";
 
+//Toast appears at top right as alerts
 toast.configure();
 
 function App() {
+  //React hooks to track if user is authenticated
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
 
+  //Function to set if user is authenticaed, can be passed into other components
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
+  //Function to check if user is authenticated, sets the react hook
   async function isAuth() {
     try {
       const response = await fetch("http://localhost:5000/auth/is-verify", {
@@ -33,34 +35,41 @@ function App() {
       });
 
       const parseRes = await response.json();
-      const isVerified = parseRes.isVerified;
 
-      isVerified === true
-        ? setIsAuthenticated(true)
-        : setIsAuthenticated(false);
-      setIsAdmin(parseRes.isAdmin);
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
     } catch (err) {
       console.error(err.message);
     }
   }
 
+  //Use effect to check if user is authenicated, runs once per page refresh
   useEffect(() => {
     isAuth();
   });
 
+  //JSX return element with switch statements to redirect to components
   return (
     <Fragment>
       <Router>
         <div>
           <Switch>
+          <Route
+              exact
+              path="/"
+              render={(props) =>
+                !isAuthenticated ? (
+                  <Login {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/studentDashboard" />
+                )
+              }
+            />
             <Route
               exact
               path="/login"
               render={(props) =>
                 !isAuthenticated ? (
                   <Login {...props} setAuth={setAuth} />
-                ) : isAdmin ? (
-                  <Redirect to="/adminDashboard" />
                 ) : (
                   <Redirect to="/studentDashboard" />
                 )

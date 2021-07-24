@@ -1,11 +1,12 @@
-//This is a callback function
-//Checks that we are sending valid information
+//Middleware that checks that we are sending valid information
+//NOTE: This will be used as a callback function
 
 module.exports = (req, res, next) => {
   const { email, name, password, password2, school } = req.body;
 
   let errors = {};
 
+  //Regex expressions to check if email follows format XXXX@YYYY.ZZZZ
   function validEmail(userEmail) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
   }

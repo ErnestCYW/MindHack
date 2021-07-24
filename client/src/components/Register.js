@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import School_Options from "./School_Options";
 
 const Register = ({ setAuth }) => {
+  //React hooks for errors and inputs
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -10,31 +11,25 @@ const Register = ({ setAuth }) => {
     name: "",
     school: "",
   });
+  const { email, password, password2, name, school } = inputs;
   const [errors, setErrors] = useState({});
 
-  //destructure
-  const { email, password, password2, name, school } = inputs;
-
+  //Function to handle change in inputs for text fields, assign to hooks
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  //Function to submit register data to backend for storage & encryption, returns a JWT token with payload for storage in browser if successful
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    console.log(inputs);
-
     try {
       const body = { email, password, password2, name, school };
-
       const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
       const parseRes = await response.json();
-      console.log(parseRes);
-
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
         setAuth(true);
@@ -48,6 +43,7 @@ const Register = ({ setAuth }) => {
     }
   };
 
+  //JSX Return Element
   return (
     <div
       className="d-flex align-items-center justify-content-center"
@@ -60,6 +56,7 @@ const Register = ({ setAuth }) => {
         overflowY: "hidden",
       }}
     >
+
       <div className="d-flex form-container" style={{ height: "50vh" }}>
         <div className="d-flex form-content-left justify-content-center align-items-center bg-light">
           <h1 className="text-center m-5 display-4">Register</h1>
@@ -78,7 +75,7 @@ const Register = ({ setAuth }) => {
                 name="email"
                 placeholder="Enter your email"
                 value={email}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e)} //allows you to type your email!
               />
               {errors.email && <p>{errors.email}</p>}
             </div>
@@ -94,7 +91,7 @@ const Register = ({ setAuth }) => {
                 name="password"
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e)} //allows you to type your password!
               />
               {errors.password && <p>{errors.password}</p>}
             </div>
@@ -110,7 +107,7 @@ const Register = ({ setAuth }) => {
                 name="password2"
                 placeholder="Confirm your password"
                 value={password2}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e)} //allows you to type your confirmed password!
               />
               {errors.password2 && <p>{errors.password2}</p>}
             </div>
@@ -126,7 +123,7 @@ const Register = ({ setAuth }) => {
                 name="name"
                 placeholder="Enter your name"
                 value={name}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e)} //allows you to type your name!
               />
               {errors.name && <p>{errors.name}</p>}
             </div>
@@ -143,7 +140,7 @@ const Register = ({ setAuth }) => {
                 placeholder="Enter your school"
                 value={school}
                 list="anrede"
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e)} //allows you to select your school!
               />
               {errors.school && <p>{errors.school}</p>}
             </div>
