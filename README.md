@@ -1,5 +1,5 @@
 # LifeHack2021: MindHack
-# Team #052
+# Team #052: Team findNewBF@CAPT16-61
 # Version 1.0
 
 ## Motivation
@@ -38,7 +38,7 @@ A **Web-Based Application** with a daily check-in form and an anonymous message 
 
 ### Daily Check-in
 
-1. A short quiz to be answered by students which checks in on their mental state. Such questions include ("How happy are you today?", "Is there something bothering you?", " etc...). 
+1. A short quiz to be answered by students which checks in on their mental state. Such questions include ("How happy are you today?", "Is there something bothering you?", etc...). 
 2. After the quiz is completed, an inspirational quote is shown.
 
 ### Message Board
@@ -53,7 +53,6 @@ A **Web-Based Application** with a daily check-in form and an anonymous message 
 4. 'At-risk' students with low scores
 5. Easy visual representation of data
 
-
 ### Extension Features
 
 1. Allow MindStatus's API to be called externally for integration into other platforms (eg. Luminus / ASKnLEARN / etc...).
@@ -62,17 +61,67 @@ A **Web-Based Application** with a daily check-in form and an anonymous message 
 4. Upvote / downvote feature on message board posts for sorting of posts.
 5. Students could be linked up with a therapist/counsellor in the chatroom to receive assistance.
 
+## Screenshots
+
+### Students
+
+Login
+![Screenshot 2021-07-24 at 11 15 55 AM](https://user-images.githubusercontent.com/71819961/126855925-259614e8-386e-4e8b-8294-9340eb731dc5.png)
+
+Register
+![Screenshot 2021-07-24 at 11 15 45 AM](https://user-images.githubusercontent.com/71819961/126855926-9a7e9861-6862-4849-85d1-325074d9f276.png)
+
+Dashboard
+![photo_2021-07-24 11 13 03](https://user-images.githubusercontent.com/71819961/126855935-01607350-c5aa-4001-828b-500d26b795dd.jpeg)
+
+### Admins
+
+Login
+![photo_2021-07-24 11 12 58](https://user-images.githubusercontent.com/71819961/126855939-3b346f9f-bae7-48f0-9525-7c6a8bf95cf3.jpeg)
+
+Register
+![photo_2021-07-24 11 13 00](https://user-images.githubusercontent.com/71819961/126855946-5096c879-54ee-426f-8134-e63816a5d4cc.jpeg)
+
+Dashboard
+![photo_2021-07-24 11 13 59](https://user-images.githubusercontent.com/71819961/126855949-11d612a7-42b4-4d5e-a6e3-bd1baff523c0.jpeg)
+
+Student Message Board
+![photo_2021-07-24 11 13 56](https://user-images.githubusercontent.com/71819961/126855954-8f4a8fcc-d0bf-49f4-b633-ed9ba0909b4e.jpeg)
+
 ## Running Application Locally
-### Frontend (client):
-cd client && npm install && npm start
 
-### Frontend (client-admin):
-cd client-admin && npm install && npm start
-
-### Server:
-cd server && npm install && nodemon index.js
+### Clone the repo and follow instructions below
 
 ### Database:
+1) Install postgresSQL on your local machine and start local server. 
+2) Start up psql command line
+3) Database port should be "5432", user should be "postgres", password should be "password123". See server/db.js for custom configuration.
+4) Copy and paste the first line in server/database.sql file into psql command line to create database (CREATE DATABASE lifehack;)
+5) Enter the following "\c lifehack" to change into database
+6) Copy and paste all lines in server/database.sql into psql command line
+7) You may choose to populate the database with dummy data by copying as pasting all lines in databaseMock.sql
+
+### Server:
+1) cd server
+2) npm install (installs dependencies based on package.json)
+3) nodemon index.js (can use included script "npm run dev" as well)
+4) server will run on localhost:5000
+
+### Frontend (client):
+1) cd client  
+2) npm install (installs dependencies based on package.json)
+3) npm start
+4) client will run on localhost:3000
+
+### Frontend (client-admin):
+1) cd client-admin
+2) npm install (installs dependencies based on package.json)
+3) npm start
+4) client will run on localhost:4000
+
+
+DO CONTACT US IF YOU ARE HAVING ANY TROUBLES RUNNNING THIS CODE, WE ARE HAPPY TO HELP!
+
 ## Tech Stack
 
 <img src="https://user-images.githubusercontent.com/71819961/126826089-db0b194b-5435-4ca0-bf28-bd2b634a9674.png" width="800">
