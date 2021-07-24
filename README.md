@@ -59,8 +59,20 @@ A **Web-Based Application** with a daily check-in form and an anonymous message 
 1. Allow MindStatus's API to be called externally for integration into other platforms (eg. Luminus / ASKnLEARN / etc...).
 2. NLP processing to highlight keywords (eg. Suicide / Depression / etc...) and assign post severity.
 3. Reminders to complete quiz.
-4. Upvote / downvote feature on message board posts for sorting of posts
+4. Upvote / downvote feature on message board posts for sorting of posts.
+5. Students could be linked up with a therapist/counsellor in the chatroom to receive assistance.
 
+## Running Application Locally
+### Frontend (client):
+cd client && npm install && npm start
+
+### Frontend (client-admin):
+cd client-admin && npm install && npm start
+
+### Server:
+cd server && npm install && nodemon index.js
+
+### Database:
 ## Tech Stack
 
 <img src="https://user-images.githubusercontent.com/71819961/126826089-db0b194b-5435-4ca0-bf28-bd2b634a9674.png" width="800">
