@@ -1,3 +1,6 @@
+//List of school options which corresponds to those in backend, see server/database.sql
+//Editable & Extensible
+
 const school_options = [
   "Anderson Serangoon Junior College",
   "Anglo-Chinese Junior College",

@@ -11,8 +11,6 @@ CREATE TABLE users (
   is_admin BOOLEAN DEFAULT false
 );
 
---Testing Insert 
-
 --School table
 CREATE TABLE schools (
   school_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -24,6 +22,15 @@ CREATE TABLE school_relations (
   user_id UUID REFERENCES users(user_id) NOT NULL
 );
 
+CREATE TABLE school_message_board (
+  school_id UUID REFERENCES schools(school_id) NOT NULL,
+  user_id UUID REFERENCES users(user_id) NOT NULL,
+  message_content TEXT NOT NULL,
+  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Insert into schools the different schools, extendible in the future
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Anderson Serangoon Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Anglo-Chinese Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Anglo-Chinese IB Junior College');
@@ -44,14 +51,7 @@ INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Victoria Junior C
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'Yishun Innova Junior College');
 INSERT INTO schools (school_id, school_name) VALUES (DEFAULT, 'National University of Singapore');
 
-CREATE TABLE school_message_board (
-  school_id UUID REFERENCES schools(school_id) NOT NULL,
-  user_id UUID REFERENCES users(user_id) NOT NULL,
-  message_content TEXT NOT NULL,
-  date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
---Check in question 1, 2, 3, 4, 5 
+--Check in questions answers
 CREATE TABLE answers (
   user_id UUID REFERENCES users(user_id) NOT NULL,
   date_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -69,6 +69,7 @@ CREATE TABLE quotes (
     content TEXT NOT NULL
 );
 
+-- Insert into quotes the different quotes, extendible in the future
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Winston Churchill', 'Success is not final, failure is not fatal: it is the courage to continue that counts.');
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Helen Keller', 'Never bend your head. Always hold it high. Look the world straight in the eye.');
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Theodore Roosevelt', 'Believe you can and youre halfway there.');
@@ -89,21 +90,3 @@ INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Marilyn Monr
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Jane Fonda', 'It’s never too late – never too late to start over, never too late to be happy.');
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'Henry David Thoreau', 'Go confidently in the direction of your dreams.  Live the life you have imagined.');
 INSERT INTO quotes (quote_id,author_name,content) VALUES (DEFAULT, 'George Eliot', 'It is never too late to be what you might have been.');
-
-
---LEFT JOIN query (Tim's)
-SELECT COUNT(distinct users.user_id) FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89';
-
-SELECT count() FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN question1 ON question1.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND users.is_admin = 'f';
-
--- Get all question scores from one user 
-INSERT INTO answers (user_id, date_time, answer1, answer2, answer3, answer4, answer5) VALUES ('6cf5ef9b-e88a-43cf-b254-ca66fdbf9fe7', NOW(), 5, 4, 3, 4, 1);
-
-SELECT date_time::date FROM answers WHERE user_id = 'c81d5410-3e62-412c-96be-86e2bcb682b1' ORDER BY date_time DESC;
-
-SELECT COUNT(DISTINCT users.user_id) FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND date_time::date BETWEEN '2021-07-23' AND 'current_date'
-
-
-SELECT COUNT(DISTINCT users.user_id) FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND date_time::date = current_date;
-
-SELECT users.user_name, answers.answer1 + answers.answer2 + answers.answer3 + answers.answer4 + answers.answer5 AS total_score FROM users LEFT JOIN school_relations ON users.user_id = school_relations.user_id LEFT JOIN schools ON school_relations.school_id = schools.school_id LEFT JOIN answers ON answers.user_id = users.user_id WHERE schools.school_id = '4cc70458-2265-41f5-9e1e-e24b8e5f4f89' AND date_time::date = CURRENT_DATE AND (answers.answer1 + answers.answer2 + answers.answer3 + answers.answer4 + answers.answer5) < 10 ORDER BY total_score;

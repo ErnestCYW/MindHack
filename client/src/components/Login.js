@@ -2,39 +2,36 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const Login = ({ setAuth }) => {
+  //React hooks for errors and inputs
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+  const { email, password } = inputs;
   const [errors, setErrors] = useState({});
 
-  const { email, password } = inputs;
-
+  //Function to handle change in inputs for text fields, assign to hooks
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  //Function to submit login data to backend for verification, returns a JWT token with payload for storage in browser if successful
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { email, password };
-
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
       const parseRes = await response.json();
-
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-
         setAuth(true);
         toast.success("Login successful");
       } else {
         setAuth(false);
-
         setErrors(parseRes);
       }
     } catch (err) {
@@ -42,6 +39,7 @@ const Login = ({ setAuth }) => {
     }
   };
 
+  //JSX Return Element
   return (
     <div
       className="d-flex align-items-center justify-content-center"
@@ -71,7 +69,7 @@ const Login = ({ setAuth }) => {
                 name="email"
                 placeholder="Enter your email"
                 value={email}
-                onChange={(e) => onChange(e)} //allows you to type!
+                onChange={(e) => onChange(e)} //allows you to type your email!
               />
               {errors.email && <p>{errors.email}</p>}
             </div>
@@ -86,7 +84,7 @@ const Login = ({ setAuth }) => {
                 name="password"
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e)} //allows you to type your password!
               />
               {errors.password && <p>{errors.password}</p>}
             </div>

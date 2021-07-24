@@ -1,7 +1,7 @@
-//Checks if JWT token is valid in order to access private routes
+//Middleware to check if JWT token is valid in order to access private routes
 
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+require("dotenv").config(); //allows access to environment variable in server/.env
 
 module.exports = async (req, res, next) => {
   try {
@@ -11,9 +11,10 @@ module.exports = async (req, res, next) => {
       return res.status(403).json("Not Authorize");
     }
 
-    //one line to check if jwtToken is valid
+    //verify token using JWT and env variable hashing
     const payload = jwt.verify(jwtToken, process.env.jwtSecret);
 
+    //store payload information in req.user
     req.user = payload.user;
   } catch (err) {
     console.error(err.message);

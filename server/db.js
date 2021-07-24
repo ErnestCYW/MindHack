@@ -1,4 +1,5 @@
-// this is a module which helps organize code into manageable parts.
+// This is the database configuration file. Used to access the database.
+// This file must be configured when deployed
 const Pool = require("pg").Pool;
 
 const pool = new Pool({

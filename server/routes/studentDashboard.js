@@ -1,6 +1,7 @@
+// For client
 const pool = require("../db");
-const authorization = require("../middleware/authorization");
 const router = require("./jwtAuth");
+const authorization = require("../middleware/authorization");
 
 router.get("/", authorization, async (req, res) => {
   try {
@@ -44,6 +45,7 @@ router.get("/", authorization, async (req, res) => {
       has_done_daily_declaration = false;
     }
 
+    //Return information to client side
     const toReturn = {
       user_name: user.rows[0].user_name,
       messages: JSON.stringify(messages.rows),
