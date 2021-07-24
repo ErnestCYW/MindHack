@@ -4,7 +4,7 @@
 
 ## Motivation
 
-In modern society, students are under increasing pressure due to rising expectations with little regard being given to their mental wellness. This problem is further exacerbated in a country like Singapore, where academic performance often takes precedence over personal happiness. It has been proven time and time again that ignoring our emotional health can have detrimental consequences, with little warning until it is too late (https://www.straitstimes.com/singapore/courts-crime/river-valley-high-school-student-16-charged-with-murder-of-schoolmate-13).
+In modern society, students are under increasing pressure due to rising expectations with little regard being given to their mental wellness. This problem is further exacerbated in a country like Singapore, where academic performance often takes precedence over personal happiness. It has been proven time and time again that ignoring our emotional and mental health can have detrimental consequences. More often than not, there is little warning and things become to late for other to intervene. One recent example would the River Valley High School incident, where mental health could have been a factor leading up to the unfortunate events that took place. (https://www.straitstimes.com/singapore/courts-crime/river-valley-high-school-student-16-charged-with-murder-of-schoolmate-13).
 
 **Problem 1: Students are shy/afraid to discuss mental health issues openly.**
 
@@ -12,16 +12,17 @@ In many societies, openly discussing personal mental health issues is often cons
 
 **Problem 2: Students do not have a proper emotional support structure.**
 
-Students often do not have dedicated emotional support structures. Parents are busy working, Teachers & Consellors have many students to attend to and have no way of singling a problem out, and peers are often busy with their own problems.
+Students often do not have dedicated emotional support structures. In line with the previous point, with a lack of mental health awareness in societies, there would be less strucutres in place to tackle the issue. Parents are busy working, Teachers & Consellors have many students to attend to and have no way of singling a problem out, and peers are often busy with their own problems. 
 
 **Problem 3: Students' mental state is never fixed and often volatile.**
 
-A student may be feeling happy on one day, and may be very sad the next. It is important to check in on their well-being everyday.
+A student may be feeling happy on one day, and may be very sad the next. Some declines in mental health may be unexpected, or not outwardly visible to others. It is important to check in on their well-being everyday.
 
 
 ## Aim
 
-In line with the problem statements given by LifeHack 2021 (Education & Social), Mindstatus aims to check in on students' daily mental status, and teach students about mental wellness through an anonymous & public message board. Our app allows for students to vent their frustrations, and also for people (peers or seniors) to address these problems. Users are able to connect with one another through common problems, and learn about how to cope with their issues.
+In line with the problem statements given by LifeHack 2021 (Education & Social), MindHack is targeted for schools, and aims to check in on students' daily mental status. The pandemic has shown us that daily temperature declaration is necessary. Why not a regular check-in system for mental health? MindHack will allow students to check-in and update how they are doing by answering short questions which serve as basic mental-health indicators. Moreover, it will be an avenue to allow anonymous and public message boards about mental-health questions, current frustrations, and queries regarding well-being. Students will be able to connect and see common problems, while teachers and counsellors will be able to analyse simple data, view 'at-risk' students, and monitor the general trend of each student's wellbeing. 
+
 
 ## User Stories
 
