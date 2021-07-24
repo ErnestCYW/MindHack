@@ -1,4 +1,4 @@
-# LifeHack2021: MindStatus
+# LifeHack2021: MindHack
 # Team #052
 # Version 1.0
 
