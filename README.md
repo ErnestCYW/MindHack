@@ -26,24 +26,32 @@ In line with the problem statements given by LifeHack 2021 (Education & Social),
 
 ## User Stories
 
-- As a student, I want to be able to share my problems and seek advice
+- As a student, I want to be able to share my problems and seek advice without fear of being judged.
 - As a student, I want someone to check-in on me daily
+- As a teacher, I want to know when to reach out to my students 
+- As a teacher, I want to be more available to my students 
 - As a parent/teacher, I want to know what problems plague my child/student and render help where I can
 
 ## Features & Overview
 
-A **Web-Based Application** with a daily check-in quiz and an anonymous message board specific to a certain community where users are able to post their messages.
+A **Web-Based Application** with a daily check-in form and an anonymous message board specific to a certain community where users are able to post their messages. Admins will be able to view this data through an authorized account. 
 
 ### Daily Check-in
 
-1. A short quiz to be answered by students which checks in on their mental state. Such questions include ("How happy are you today?", "Is there something bothering you?". etc...). This quiz resets daily.
+1. A short quiz to be answered by students which checks in on their mental state. Such questions include ("How happy are you today?", "Is there something bothering you?", " etc...). 
 2. After the quiz is completed, an inspirational quote is shown.
-3. Admins will have access to this data to show the general well-being of their students and render help accordingly
 
 ### Message Board
 
 1. An anonymous message board specific to a school where students in that school can post about their problems and worries anonymously.
 2. Admins (Teacher / Parents / etc...) or peers can respond to these messages to provide assistance or a listening ear.
+
+### Admin overview
+1. Access to well-being check-in data of students.
+2. Daily, weekly, monthly charts of all students, and individual students.
+3. Data on individual questions.
+4. 'At-risk' students with low scores
+5. Easy visual representation of data
 
 
 ### Extension Features
@@ -51,7 +59,7 @@ A **Web-Based Application** with a daily check-in quiz and an anonymous message 
 1. Allow MindStatus's API to be called externally for integration into other platforms (eg. Luminus / ASKnLEARN / etc...).
 2. NLP processing to highlight keywords (eg. Suicide / Depression / etc...) and assign post severity.
 3. Reminders to complete quiz.
-4. Like / Dislike feature on message board posts for sorting of posts
+4. Upvote / downvote feature on message board posts for sorting of posts
 
 ## Tech Stack
 
