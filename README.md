@@ -65,6 +65,8 @@ A **Web-Based Application** with a daily check-in form and an anonymous message 
 
 <img src="https://user-images.githubusercontent.com/71819961/126826089-db0b194b-5435-4ca0-bf28-bd2b634a9674.png" width="800">
 
+<img src="https://user-images.githubusercontent.com/71819961/126855818-80977785-99e4-43d7-8a7f-06393dfb4330.png" width="800">
+
 1. HTML / CSS / Javascript 
 2. ExpressJS / NodeJS
 3. PostgreSQL 
