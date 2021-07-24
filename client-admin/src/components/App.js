@@ -16,30 +16,33 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 
 toast.configure();
+
+//React Functional Component to be rendered
 export default function App() {
   // global
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  //helper to set Auth
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
 
+  //Connecting with server to do a GET request to confirm if user is verified
   async function isAuth() {
     try {
       const response = await fetch("http://localhost:5000/auth/is-verify", {
         method: "GET",
         headers: { token: localStorage.token },
       });
-
       const parseRes = await response.json();
-
       parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
       console.log(isAuthenticated);
     } catch (err) {
       console.error(err.message);
     }
   }
-
+  
+  // React life cycle hook to determine authentication state on refresh
   useEffect(() => {
     isAuth();
   });

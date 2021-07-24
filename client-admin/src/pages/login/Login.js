@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+// Styling components
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -22,9 +23,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Login = ({ setAuth }) => {
+// React functional component to render login page
+function Login({ setAuth }) {
   const classes = useStyles();
 
+  // Initialising states
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -33,15 +36,18 @@ const Login = ({ setAuth }) => {
 
   const { email, password } = inputs;
 
+  // inputs destructuring
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  // Connect to server and attempt user log in
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { email, password };
 
+      // Connect to server with a POST request to log user in
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

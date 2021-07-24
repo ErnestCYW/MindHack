@@ -23,6 +23,7 @@ import {
   toggleSidebar,
 } from "../../context/LayoutContext";
 
+// defining structure of the side bar
 const structure = [
   { id: 0,
     label: "Dashboard",
@@ -43,6 +44,7 @@ const structure = [
   }
 ];
 
+// React functional component
 function Sidebar({ location }) {
   var classes = useStyles();
   var theme = useTheme();
@@ -54,6 +56,7 @@ function Sidebar({ location }) {
   // local
   var [isPermanent, setPermanent] = useState(true);
 
+  //React life cycle hook 
   useEffect(function() {
     window.addEventListener("resize", handleWindowWidthChange);
     handleWindowWidthChange();

@@ -41,6 +41,8 @@ export default function Header(props) {
   const [user, setUser] = useState("");
   const [school, setSchool] = useState("")
 
+  // getAll is a function call to the server for retrieval from database
+  //    in this case, retrieving the user_name and school for a more peronalised UX
   const getAll = async () => {
     try {
       const response = await fetch("http://localhost:5000/adminDashboard/", {

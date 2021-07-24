@@ -9,6 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 import { LayoutProvider } from "./context/LayoutContext";
 import { UserProvider } from "./context/UserContext";
 
+//Rendering App
 ReactDOM.render(
   <LayoutProvider>
     <UserProvider>

@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import School_Options from "./School_Options";
 import MenuItem from '@material-ui/core/MenuItem';
+import School_Options from "./School_Options";
 
+
+//Styling
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -24,9 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Register = ({ setAuth }) => {
+function Register({ setAuth }) {
+  //u use styles
   const classes = useStyles();
 
+  // initialise states
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -36,13 +40,15 @@ const Register = ({ setAuth }) => {
   });
   const [errors, setErrors] = useState({});
 
-  //destructure
+  //destructuring of inputs
   const { email, password, password2, name, school } = inputs;
 
+  //dynamic updating of inputs
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  // function to handle regsitration with server
   const onSubmitForm = async (e) => {
     e.preventDefault();
     console.log(inputs);
@@ -50,6 +56,7 @@ const Register = ({ setAuth }) => {
     try {
       const body = { email, password, password2, name, school };
 
+      // Connecting with Server with a POST request to register
       const response = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -17,6 +17,7 @@ import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 
+// functional component rendering of dashboard
 export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
@@ -29,6 +30,7 @@ export default function Dashboard(props) {
   const [q5Data, setQ5Data] = useState([0, 0, 0, 0, 0]);
   const [dangerStudents, setDangerStudents] = useState([]);
 
+  // initialising of graph data
   const q1data = [
     { name: "1", value: q1Data[0], color: "primary" },
     { name: "2", value: q1Data[1], color: "secondary" },
@@ -69,6 +71,8 @@ export default function Dashboard(props) {
     { name: "5", value: q5Data[4], color: "info" },
   ];
 
+  // getAll is a function call to the server for retrieval from database
+  //    in this case, receiving totalStudents, totalStudentsResponded and totalRespondedToday
   const getAll = async () => {
     try {
       const response = await fetch("http://localhost:5000/adminDashboard/", {
@@ -116,7 +120,7 @@ export default function Dashboard(props) {
     <>
       <PageTitle title="Dashboard" />
       <Grid container spacing={4}>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
+        <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Date"
             upperTitle
