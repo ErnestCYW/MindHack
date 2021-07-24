@@ -80,17 +80,20 @@ function StudentDashboard({ setAuth }) {
 
   const selectResponse = (setState, name) => {
     return (
-      <div>
-        <input
-          class="form-check-input"
-          type="radio"
-          name={name}
-          id="option1"
-          onChange={() => setState(1)}
-        ></input>
-        <label class="form-check-label" for="option1">
-          1
-        </label>
+      <div class={"d-flex flex-row"}>
+        <div style={styles.check}>
+          <input
+            class="form-check-input"
+            type="radio"
+            name={name}
+            id="option1"
+            onChange={() => setState(1)}
+          ></input>
+          <label class="form-check-label" for="option1">
+            <pre> 1</pre>
+          </label>
+        </div>
+        <div style={styles.check}>
         <input
           class="form-check-input"
           type="radio"
@@ -99,8 +102,10 @@ function StudentDashboard({ setAuth }) {
           onChange={() => setState(2)}
         ></input>
         <label class="form-check-label" for="option2">
-          2
+        <pre> 2</pre>
         </label>
+        </div>
+        <div style={styles.check}>
         <input
           class="form-check-input"
           type="radio"
@@ -109,8 +114,10 @@ function StudentDashboard({ setAuth }) {
           onChange={() => setState(3)}
         ></input>
         <label class="form-check-label" for="option3">
-          3
+        <pre> 3</pre>
         </label>
+        </div>
+        <div style={styles.check}>
         <input
           class="form-check-input"
           type="radio"
@@ -119,8 +126,10 @@ function StudentDashboard({ setAuth }) {
           onChange={() => setState(4)}
         ></input>
         <label class="form-check-label" for="option4">
-          4
+        <pre> 4</pre>
         </label>
+        </div>
+        <div style={styles.check}>
         <input
           class="form-check-input"
           type="radio"
@@ -129,8 +138,9 @@ function StudentDashboard({ setAuth }) {
           onChange={() => setState(5)}
         ></input>
         <label class="form-check-label" for="option5">
-          5
+        <pre> 5</pre>
         </label>
+        </div>
       </div>
     );
   };
@@ -140,20 +150,32 @@ function StudentDashboard({ setAuth }) {
       return <div>{getQuote()}</div>;
     } else {
       return (
-        <div>
-          <div>How happy are you today?</div>
-          {selectResponse(setAnswer1, "q1")}
-          <div>How stressed are you today?</div>
-          {selectResponse(setAnswer2, "q2")}
-          <div>Question3</div>
-          {selectResponse(setAnswer3, "q3")}
-          <div>Question4</div>
-          {selectResponse(setAnswer4, "q4")}
-          <div>Question5</div>
-          {selectResponse(setAnswer5, "q5")}
+        <div style={styles.question}>
+          <h2>Daily Check</h2>
+          <div style={styles.question}>
+            <div>How happy are you today?</div>
+            {selectResponse(setAnswer1, "q1")}
+          </div>
+          <div style={styles.question}>
+            <div>How stressed are you today?</div>
+            {selectResponse(setAnswer2, "q2")}
+          </div>
+          <div style={styles.question}>
+            <div>How well are you coping today?</div>
+            {selectResponse(setAnswer3, "q3")}
+          </div>
+          <div style={styles.question}>
+            <div>To what extent do you think you need help?</div>
+            {selectResponse(setAnswer4, "q4")}
+          </div>
+          <div style={styles.question}>
+            <div>Are you okay?</div>
+            {selectResponse(setAnswer5, "q5")}
+          </div>
           <button
             className="btn btn-primary btn-sm "
             onClick={() => submitAnswers()}
+            style={{marginTop: 10}}
           >
             Submit
           </button>
@@ -184,7 +206,7 @@ function StudentDashboard({ setAuth }) {
 
   const submitMessage = async (e) => {
     e.preventDefault();
-    if (newMessage!="") {
+    if (newMessage!=="") {
       console.log(newMessage);
       try {
         const response = await fetch(
@@ -228,6 +250,11 @@ function StudentDashboard({ setAuth }) {
     input: {
       width : "342px",
       height : "150px",
+    },
+    question: {
+    },
+    check: {
+      paddingRight: 10,
     }
   }
 
@@ -247,24 +274,16 @@ function StudentDashboard({ setAuth }) {
           </button>
         </div>
       </div>
-
-      <div className="row">
-        <nav
-          id="sidebarMenu"
-          class="col-md-3 d-md-block sidebar collapse position-fixed shadow p-3 mb-5 rounded bg-light"
-          style = {{"height":"100vh"}}
-        >
- 
-          {survey()}
-
-        </nav>
+      <div class="row justify-content-around" style={{marginTop: 30,}}>
+      <div class="col-2">
+        {survey()}
       </div>
 
-      <div className="col-md-9 ms-sm-auto px-md-4">
-      <div class="row row-cols-1 row-cols-md-2 g-4" style={{marginTop: 10,}}>
+      <div class="col-9">
+      <div class="row">
         {messages.map((message) => {
               return (
-                <div class="card border-primary mb-3" style={{width: 400, marginLeft: 15, marginRight: 15,}}>
+                <div class="card border-primary mb-5" style={{width: 400, marginLeft: 15, marginRight: 15,}}>
                   <div class="card-body">
                     <h5 class="card-title">{message.message_content}</h5>
                   </div>
@@ -276,8 +295,9 @@ function StudentDashboard({ setAuth }) {
               );
             })}
         {inputMessage()}
-      </div> 
       </div>
+      </div>
+    </div>
     </div>
   );
 }
