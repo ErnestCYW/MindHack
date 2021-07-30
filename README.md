@@ -59,7 +59,9 @@ A **Web-Based Application** with a daily check-in form and an anonymous message 
 2. NLP processing to highlight keywords (eg. Suicide / Depression / etc...) and assign post severity.
 3. Reminders to complete quiz.
 4. Upvote / downvote feature on message board posts for sorting of posts.
-5. Students could be linked up with a therapist/counsellor in the chatroom to receive assistance.
+5. Students could be linked up with a therapist/counsellor instantaneosuly in a chat room to receive assistance.
+6. Students can chat with other students omegle style.
+7. Open response questions (eg. Anything to get off your chest? / Share with me something that has been bothering you? / ....)
 
 ## Screenshots
 
